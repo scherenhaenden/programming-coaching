@@ -4,7 +4,7 @@ using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
 namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
 public class CarFilterService {
-    private List<CarModel> _cars = new MockedModels().Cars;
+    private readonly List<CarModel> _cars = new MockedModels().Cars;
 
     public List<CarModel> FilterCars(CarFilterOptions options) {
         var filteredCars = _cars;

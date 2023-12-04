@@ -10,15 +10,15 @@ using System.Collections.Generic;
 
 [TestFixture]
 public class AutoLeasingManagementFixedTests {
-    private AutoLeasingManagementFixed _autoLeasingManagement;
-    private MockedModels _mockedData;
-    private double _possibleDiscount = 10;
-    
+    private readonly AutoLeasingManagementFixed _autoLeasingManagement = new();
+    private readonly MockedModels _mockedData = new();
+    private readonly double _possibleDiscount = 10;
+
+
     [SetUp]
     public void SetUp() {
         // Initialize the AutoLeasingManagementFixed instance
-        _autoLeasingManagement = new AutoLeasingManagementFixed();
-        _mockedData = new MockedModels();
+      
     }
 
     [Test]
@@ -75,9 +75,10 @@ public class AutoLeasingManagementFixedTests {
 
         // Assert
         Assert.IsNotNull(result);
+        Assert.IsNotNull(result.Data);
         Assert.IsTrue(result.Success);
         Assert.IsInstanceOf<List<CarModel>>(result.Data);
-        Assert.IsTrue(result.Data.Count > 0);
+        Assert.IsTrue(result.Data?.Count > 0);
     }
 
     [Test]
@@ -91,10 +92,11 @@ public class AutoLeasingManagementFixedTests {
 
         // Assert
         Assert.IsNotNull(result);
+        Assert.IsNotNull(result.Data);
         Assert.IsTrue(result.Success);
         Assert.IsInstanceOf<List<CarModel>>(result.Data);
-        Assert.IsTrue(result.Data.Count > 0);
-        _mockedData.Cars.Take(40).ToList().ForEach(x => Assert.IsTrue( result.Data.Single(y =>y.Id == x.Id).Price <= x.Price)); 
+        Assert.IsTrue(result.Data?.Count > 0);
+        _mockedData.Cars.Take(40).ToList().ForEach(x => Assert.IsTrue( result.Data?.Single(y =>y.Id == x.Id).Price <= x.Price)); 
     }
 
     [Test]

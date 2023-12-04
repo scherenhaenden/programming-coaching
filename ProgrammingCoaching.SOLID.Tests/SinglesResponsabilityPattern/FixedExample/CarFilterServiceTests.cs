@@ -1,4 +1,3 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.DummyData;
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
@@ -6,12 +5,13 @@ namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExam
 
 [TestFixture]
 public class CarFilterServiceTests {
-    private List<CarModel> _mockedCars;
+
+    
 
     [SetUp]
     public void SetUp() {
         // Initialize the list of mocked cars for testing
-        _mockedCars = new MockedModels().Cars;
+        
     }
 
     [Test]

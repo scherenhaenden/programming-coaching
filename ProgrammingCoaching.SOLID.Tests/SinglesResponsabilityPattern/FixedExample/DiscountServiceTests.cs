@@ -1,4 +1,3 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
 namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExample;

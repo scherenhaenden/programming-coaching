@@ -4,9 +4,9 @@ namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
 public class AutoLeasingManagementFixed
 {
-    private UserManager _userManager;
-    private CarFilterService _carFilterService;
-    private DiscountService _discountService;
+    private readonly UserManager _userManager;
+    private readonly CarFilterService _carFilterService;
+    private readonly DiscountService _discountService;
 
     public AutoLeasingManagementFixed() {
         _userManager = new UserManager();

@@ -1,26 +1,25 @@
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.BadExample;
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.DummyData;
 
-
-namespace ProgrammingCoaching.Tests
+namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.BadExample
 {
     [TestFixture]
     public class AutoLeasingManagementBadTests
     {
-        private AutoLeasingManagementBad autoLeasingManagement;
-        private MockedModels mockedData;
+        private readonly AutoLeasingManagementBad _autoLeasingManagement = new();
+        private readonly MockedModels _mockedData = new();
 
         [SetUp]
         public void Setup()
         {
-            mockedData = new MockedModels();
-            autoLeasingManagement = new AutoLeasingManagementBad();
+            //mockedData = new MockedModels();
+            //autoLeasingManagement = new AutoLeasingManagementBad();
         }
 
         [Test]
         public void GetAvailableCarsOnRequest_WithValidUser_ReturnsCars()
         {
-            var result = autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null);
+            var result = _autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null);
  
             Assert.IsNotEmpty(result);
             Assert.IsNotEmpty(result);
@@ -29,8 +28,8 @@ namespace ProgrammingCoaching.Tests
         [Test]
         public void GetAvailableCarsOnRequest_WithValidUser_AndInvalidUserToComparePrices_ReturnsCars()
         {
-            var cheaperList = autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null,true);
-            var normalPricesList = autoLeasingManagement.GetAvailableCarsOnRequest("NonExistentUser", null, null);
+            var cheaperList = _autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null,true);
+            var normalPricesList = _autoLeasingManagement.GetAvailableCarsOnRequest("NonExistentUser", null, null);
             Assert.IsNotEmpty(cheaperList);
             Assert.IsNotEmpty(normalPricesList);
             
@@ -47,14 +46,14 @@ namespace ProgrammingCoaching.Tests
         [Test]
         public void GetAvailableCarsOnRequest_UserNotFound_ThrowsException()
         {
-            Assert.Throws<Exception>(() => autoLeasingManagement.GetAvailableCarsOnRequest("NonExistentUser", null, null, true));
+            Assert.Throws<Exception>(() => _autoLeasingManagement.GetAvailableCarsOnRequest("NonExistentUser", null, null, true));
         }
 
         [Test]
         public void GetAvailableCarsOnRequest_ApplyDiscountToExistingUser_DiscountsPrices()
         {
-            var carsBeforeDiscount = mockedData.Cars.Select(c => c.Price).ToList();
-            var result = autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null, true);
+            var carsBeforeDiscount = _mockedData.Cars.Select(c => c.Price).ToList();
+            var result = _autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null, true);
             var carsAfterDiscount = result.Select(c => c.Price).ToList();
 
             for (int i = 0; i < carsBeforeDiscount.Count; i++)
@@ -67,7 +66,7 @@ namespace ProgrammingCoaching.Tests
         public void GetAvailableCarsOnRequest_FilterByMinNumberOfDoors_ReturnsFilteredCars()
         {
             var minDoors = 4;
-            var result = autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null, false, minDoors);
+            var result = _autoLeasingManagement.GetAvailableCarsOnRequest("User1", null, null, false, minDoors);
             Assert.IsTrue(result.All(c => c.NumberOfDoors >= minDoors));
         }
 

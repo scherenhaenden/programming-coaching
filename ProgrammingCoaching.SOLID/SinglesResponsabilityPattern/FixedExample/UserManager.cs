@@ -8,7 +8,7 @@ namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 /// Manages user information.
 /// </summary>
 public class UserManager {
-    private List<UserModel> _users = new MockedModels().Users;
+    private readonly List<UserModel> _users = new MockedModels().Users;
 
     /// <summary>
     /// Gets a user by their login name.

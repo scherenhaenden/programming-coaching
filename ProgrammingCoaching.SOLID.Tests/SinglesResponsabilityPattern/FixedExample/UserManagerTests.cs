@@ -3,7 +3,6 @@ using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExample;
 
 using NUnit.Framework;
-using System.Collections.Generic;
 
 [TestFixture]
 public class UserManagerTests {
