@@ -2,9 +2,27 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SOLID", "SOLID", "{73F31F99-2494-4D10-B488-3CAFB0A3ADD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingCoaching.SOLID", "ProgrammingCoaching.SOLID\ProgrammingCoaching.SOLID.csproj", "{C48D3159-6839-4CEC-9633-9630F6D3DA9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingCoaching.SOLID.Tests", "ProgrammingCoaching.SOLID.Tests\ProgrammingCoaching.SOLID.Tests.csproj", "{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C48D3159-6839-4CEC-9633-9630F6D3DA9E} = {73F31F99-2494-4D10-B488-3CAFB0A3ADD4}
+		{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B} = {73F31F99-2494-4D10-B488-3CAFB0A3ADD4}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C48D3159-6839-4CEC-9633-9630F6D3DA9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48D3159-6839-4CEC-9633-9630F6D3DA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48D3159-6839-4CEC-9633-9630F6D3DA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48D3159-6839-4CEC-9633-9630F6D3DA9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4694C7C5-F4BB-47CB-A5B6-B18E8B9F683B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
