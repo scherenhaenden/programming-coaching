@@ -5,7 +5,7 @@ Programming Coaching is a comprehensive learning platform designed for developer
 
 ## Features
 - - [ ] Interactive learning modules
-- - [ ] Real- - [ ]world examples and case studies
+- - [ ] Real-world examples and case studies
 - - [ ] Personalized progress tracking
 
 ## SOLID Principles and Related Concepts
@@ -63,7 +63,7 @@ This program covers a wide range of principles and concepts essential fo‚r mod
 ## Getting Started
 To get started with Programming Coaching, follow these steps:
 1. Clone the repository: `git clone [repository URL]`
-2. Navigate to the project directory: `cd programming- - [ ]coaching`
+2. Navigate to the project directory: `cd programming-coaching`
 3. Install dependencies: `npm install` (Assuming it uses Node.js/npm)
 4. Start the application: `npm start`
 
