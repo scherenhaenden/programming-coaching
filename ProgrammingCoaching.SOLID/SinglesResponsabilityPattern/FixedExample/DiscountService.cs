@@ -1,4 +1,4 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
+using ProgrammingCoaching.SOLID.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 

@@ -26,4 +26,8 @@
       <ProjectReference Include="..\ProgrammingCoaching.SOLID\ProgrammingCoaching.SOLID.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="AntiPattern\" />
+    </ItemGroup>
+
 </Project>

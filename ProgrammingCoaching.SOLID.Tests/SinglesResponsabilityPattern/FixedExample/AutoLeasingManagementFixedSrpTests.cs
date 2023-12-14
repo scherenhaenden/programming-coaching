@@ -1,5 +1,5 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.DummyData;
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
+using ProgrammingCoaching.SOLID.Data.DummyData;
+using ProgrammingCoaching.SOLID.Data.Models;
 using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
 namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExample;
@@ -9,8 +9,8 @@ using System;
 using System.Collections.Generic;
 
 [TestFixture]
-public class AutoLeasingManagementFixedTests {
-    private readonly AutoLeasingManagementFixed _autoLeasingManagement = new();
+public class AutoLeasingManagementFixedSrpTests {
+    private readonly AutoLeasingManagementFixedSRP _autoLeasingManagement = new();
     private readonly MockedModels _mockedData = new();
     private readonly double _possibleDiscount = 10;
 

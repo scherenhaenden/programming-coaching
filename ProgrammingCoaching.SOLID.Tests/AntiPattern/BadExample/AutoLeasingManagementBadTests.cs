@@ -1,7 +1,7 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.BadExample;
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.DummyData;
+using ProgrammingCoaching.SOLID.AntiPattern.BadExample.AutoLeasing;
+using ProgrammingCoaching.SOLID.Data.DummyData;
 
-namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.BadExample
+namespace ProgrammingCoaching.SOLID.Tests.AntiPattern.BadExample
 {
     [TestFixture]
     public class AutoLeasingManagementBadTests

@@ -1,5 +1,5 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.DummyData;
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.Data.Models;
+using ProgrammingCoaching.SOLID.Data.DummyData;
+using ProgrammingCoaching.SOLID.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
 
