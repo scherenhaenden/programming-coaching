@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Bogus" Version="35.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
         <PackageReference Include="NUnit" Version="3.14.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
@@ -28,6 +29,8 @@
 
     <ItemGroup>
       <Folder Include="AntiPattern\" />
+      <Folder Include="AntiPattern\BadExample\AutoLeasing\" />
+      <Folder Include="Examples\Credit\FixedExample\Services\UserExternal\" />
     </ItemGroup>
 
 </Project>

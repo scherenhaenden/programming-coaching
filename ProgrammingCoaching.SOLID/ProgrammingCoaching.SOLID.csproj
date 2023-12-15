@@ -9,6 +9,12 @@
 
     <ItemGroup>
       <Folder Include="AntiPattern\" />
+      <Folder Include="Examples\AutoLeasing\" />
+      <Folder Include="Examples\Credit\BetterExample\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Bogus" Version="35.0.1" />
     </ItemGroup>
 
 </Project>
