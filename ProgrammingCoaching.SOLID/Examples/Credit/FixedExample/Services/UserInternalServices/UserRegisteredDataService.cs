@@ -1,25 +1,25 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
-
-public class UserRegisteredDataService: IUserRegisteredDataService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices
 {
-    private readonly DataCredit _db;
-    private readonly IUserExternalService _userExternalService;
+    public class UserRegisteredDataService: IUserRegisteredDataService
+    {
+        private readonly DataCredit _db;
+        private readonly IUserExternalService _userExternalService;
 
-    public UserRegisteredDataService(DataCredit db, IUserExternalService userExternalService)
+        public UserRegisteredDataService(DataCredit db, IUserExternalService userExternalService)
     {
         _db = db;
         _userExternalService = userExternalService;
     }
     
-    public RegistredUser? GetUserRegistered(string nationalIdentificationId)
+        public RegistredUser? GetUserRegistered(string nationalIdentificationId)
     {
         return _db.RegistredUsers.SingleOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
     }
 
-    public RegistredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
+        public RegistredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
     {
         var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
         
@@ -35,7 +35,7 @@ public class UserRegisteredDataService: IUserRegisteredDataService
         return GetUserRegistered(nationalIdentificationId);
     }
     
-    public RegistredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
+        public RegistredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
     {
         // muss raus
         var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
@@ -50,5 +50,6 @@ public class UserRegisteredDataService: IUserRegisteredDataService
         });
         
         return GetUserRegistered(nationalIdentificationId);
+    }
     }
 }

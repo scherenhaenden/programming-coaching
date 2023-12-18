@@ -1,20 +1,20 @@
 using Bogus;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data;
-
-public class ClassGenerateData
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
 {
-    public static List<User> Users = new List<User>();
-    public static List<CreditRatingUserExternals> CreditRatingUserExternals = new List<CreditRatingUserExternals>();
+    public class ClassGenerateData
+    {
+        public static List<User> Users = new List<User>();
+        public static List<CreditRatingUserExternals> CreditRatingUserExternals = new List<CreditRatingUserExternals>();
     
     
-    public static List<RegistredUser> RegistredUsers { get; set; } = new List<RegistredUser>();
+        public static List<RegistredUser> RegistredUsers { get; set; } = new List<RegistredUser>();
     
     
-    private static bool _isCreated = false;
+        private static bool _isCreated = false;
 
 
-    public static void CreateAll()
+        public static void CreateAll()
     {
         if(_isCreated) return;
         
@@ -23,7 +23,7 @@ public class ClassGenerateData
         
         _isCreated = true;
     }
-    public static IEnumerable<IEnumerable<T>> SplitListByCount<T>(List<T> list, int numberOfParts)
+        public static IEnumerable<IEnumerable<T>> SplitListByCount<T>(List<T> list, int numberOfParts)
     {
         int itemsPerPart = list.Count / numberOfParts;
         int remainder = list.Count % numberOfParts;
@@ -37,7 +37,7 @@ public class ClassGenerateData
         }
     }
     
-    public static IEnumerable<IEnumerable<T>> SplitList<T>(List<T> locations, int nSize)
+        public static IEnumerable<IEnumerable<T>> SplitList<T>(List<T> locations, int nSize)
     {
         for (int i = 0; i < locations.Count; i += nSize)
         {
@@ -45,7 +45,7 @@ public class ClassGenerateData
         }
     }
     
-    public static void CreateUsers()
+        public static void CreateUsers()
     {
         // Create with bogus
         var testsUsers = new Faker<User>().StrictMode(true)
@@ -124,9 +124,9 @@ public class ClassGenerateData
     
     
     
-    public static List<CreditConditions> CreditConditions = new List<CreditConditions>();
+        public static List<CreditConditions> CreditConditions = new List<CreditConditions>();
     
-    public static void GenerateStaticCasesConditions()
+        public static void GenerateStaticCasesConditions()
     {
         var autoLoanConditions = new CreditConditions(CreditType.AutoLoan, 5000m, 50000m,
             new Dictionary<decimal, double>
@@ -299,4 +299,5 @@ public class ClassGenerateData
     }
     
     
+    }
 }

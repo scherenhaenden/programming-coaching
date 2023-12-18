@@ -2,9 +2,9 @@ using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
 
-namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.UserInternalServices;
-
-[TestFixture]
+namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.UserInternalServices
+{
+    [TestFixture]
     public class UserRegisteredDataServiceTests
     {
         
@@ -93,3 +93,4 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             // Add more specific assertions based on your requirements
         }
     }
+}

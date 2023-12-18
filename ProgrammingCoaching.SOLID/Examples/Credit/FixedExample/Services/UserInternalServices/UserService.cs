@@ -1,52 +1,53 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
-
-public class UserService: IUserService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices
 {
-    private readonly DataCredit _db;
-    private readonly IUserExternalService _userExternalService;
-    private readonly IUserRegisteredDataService _userRegisteredDataService;
-
-    public UserService(DataCredit db, IUserExternalService userExternalService, IUserRegisteredDataService userRegisteredDataService)
+    public class UserService: IUserService
     {
-        _db = db;
-        _userExternalService = userExternalService;
-        _userRegisteredDataService = userRegisteredDataService;
-    }
+        private readonly DataCredit _db;
+        private readonly IUserExternalService _userExternalService;
+        private readonly IUserRegisteredDataService _userRegisteredDataService;
+
+        public UserService(DataCredit db, IUserExternalService userExternalService, IUserRegisteredDataService userRegisteredDataService)
+        {
+            _db = db;
+            _userExternalService = userExternalService;
+            _userRegisteredDataService = userRegisteredDataService;
+        }
  
 
-    public RegistredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
-    {
-        var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
-        
-        if(registredUser == null)
+        public RegistredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
         {
-            if (wantToRegister)
+            var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
+        
+            if(registredUser == null)
             {
-                return _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId)!;
-            }
-            return _userRegisteredDataService.RegisterUserWithoutBankAccountAndGetReisteredUser(nationalIdentificationId)!;
+                if (wantToRegister)
+                {
+                    return _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId)!;
+                }
+                return _userRegisteredDataService.RegisterUserWithoutBankAccountAndGetReisteredUser(nationalIdentificationId)!;
             
+            }
+
+            return registredUser;
         }
 
-        return registredUser;
-    }
-
-    public ExtendedUserInformation? GetAllUserInformation(string nationalIdentificationId)
-    {
-        var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
-        var externalInformation = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
-        var user = _db.Users.SingleOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
-        
-        var extendedUserInformation = new ExtendedUserInformation()
+        public ExtendedUserInformation? GetAllUserInformation(string nationalIdentificationId)
         {
-            RegistredUser = registredUser,
-            User = user,
-            CreditRatingUserExternals = externalInformation
-        };
-        return extendedUserInformation;
+            var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
+            var externalInformation = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
+            var user = _db.Users.SingleOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
+        
+            var extendedUserInformation = new ExtendedUserInformation()
+            {
+                RegistredUser = registredUser,
+                User = user,
+                CreditRatingUserExternals = externalInformation
+            };
+            return extendedUserInformation;
 
+        }
     }
 }

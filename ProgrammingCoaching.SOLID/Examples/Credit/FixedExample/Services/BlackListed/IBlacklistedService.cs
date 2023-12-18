@@ -1,8 +1,9 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListed;
-
-public interface IBlacklistedService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListed
 {
-    bool GetBlackListStatus(ExtendedUserInformation extendedUserInformation);
+    public interface IBlacklistedService
+    {
+        bool GetBlackListStatus(ExtendedUserInformation extendedUserInformation);
+    }
 }

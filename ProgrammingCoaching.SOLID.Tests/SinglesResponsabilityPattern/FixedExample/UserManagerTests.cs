@@ -1,13 +1,13 @@
-using ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
+using ProgrammingCoaching.SOLID.Examples.AutoLeasing.FixedExample;
 
-namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExample;
+namespace ProgrammingCoaching.SOLID.Tests.SinglesResponsabilityPattern.FixedExample
+{
+    using NUnit.Framework;
 
-using NUnit.Framework;
-
-[TestFixture]
-public class UserManagerTests {
-    [Test]
-    public void GetUser_UserExists_ReturnsUserModel() {
+    [TestFixture]
+    public class UserManagerTests {
+        [Test]
+        public void GetUser_UserExists_ReturnsUserModel() {
         // Arrange
         var userManager = new UserManager();
         var userLogin = "User1";
@@ -20,8 +20,8 @@ public class UserManagerTests {
         Assert.AreEqual(userLogin, result!.Name);
     }
 
-    [Test]
-    public void GetUser_UserDoesNotExist_ReturnsNull() {
+        [Test]
+        public void GetUser_UserDoesNotExist_ReturnsNull() {
         // Arrange
         var userManager = new UserManager();
         var userLogin = "NonExistentUser";
@@ -31,5 +31,6 @@ public class UserManagerTests {
 
         // Assert
         Assert.IsNull(result);
+    }
     }
 }

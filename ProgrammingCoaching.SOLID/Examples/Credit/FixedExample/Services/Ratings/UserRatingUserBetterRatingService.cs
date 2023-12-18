@@ -1,17 +1,18 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
-
-public class UserRatingUserBetterRatingService: IUserRatingService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings
 {
-    public double GetRating(double internalRating, double externalRating)
+    public class UserRatingUserBetterRatingService: IUserRatingService
     {
-        // use the biggest value
-        return Math.Max(internalRating, externalRating);
-    }
+        public double GetRating(double internalRating, double externalRating)
+        {
+            // use the biggest value
+            return Math.Max(internalRating, externalRating);
+        }
 
-    public double GetRating(ExtendedUserInformation extendedUserInformation)
-    {
-        return GetRating(extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0, extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0);
+        public double GetRating(ExtendedUserInformation extendedUserInformation)
+        {
+            return GetRating(extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0, extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0);
+        }
     }
 }

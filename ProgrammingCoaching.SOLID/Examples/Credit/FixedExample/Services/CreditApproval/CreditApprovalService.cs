@@ -3,37 +3,38 @@ using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListe
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.CreditApproval;
-
-public class CreditApprovalService: ICreditApprovalService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.CreditApproval
 {
-    private readonly IUserService _userService;
-    private readonly ICreditService _creditService;
-
-    public CreditApprovalService(IUserService userService, IBlacklistedService blacklistedService, IUserRatingService userRatingService, IConditionRatings conditionRatings)
+    public class CreditApprovalService: ICreditApprovalService
     {
-        _userService = userService;
-        _creditService = new CreditService(blacklistedService, userRatingService, conditionRatings);
-    }
-    
-    public bool CanCreditBeGiven(CreditApplicationModel creditApplicationModel)
-    {
-        // 1. Check if user is registered if not register it and create a bank account for him
-        // if he wants to register
-        // if he does not want to register, register him without bank account
-        var registered = _userService.HandleDataInformationOfUser(creditApplicationModel.NationalIdentificationID, creditApplicationModel.WantToRegister);
+        private readonly IUserService _userService;
+        private readonly ICreditService _creditService;
 
-        // case not really taken into account
-        if (registered == null)
+        public CreditApprovalService(IUserService userService, IBlacklistedService blacklistedService, IUserRatingService userRatingService, IConditionRatings conditionRatings)
         {
-            return false;
+            _userService = userService;
+            _creditService = new CreditService(blacklistedService, userRatingService, conditionRatings);
         }
+    
+        public bool CanCreditBeGiven(CreditApplicationModel creditApplicationModel)
+        {
+            // 1. Check if user is registered if not register it and create a bank account for him
+            // if he wants to register
+            // if he does not want to register, register him without bank account
+            var registered = _userService.HandleDataInformationOfUser(creditApplicationModel.NationalIdentificationID, creditApplicationModel.WantToRegister);
+
+            // case not really taken into account
+            if (registered == null)
+            {
+                return false;
+            }
         
-        var userInformation = _userService.GetAllUserInformation(registered?.NationalIdentificationID);
+            var userInformation = _userService.GetAllUserInformation(registered?.NationalIdentificationID);
         
-        return _creditService.CanGetCreditByRatingCalculation(creditApplicationModel, userInformation);
+            return _creditService.CanGetCreditByRatingCalculation(creditApplicationModel, userInformation);
        
+        }
+    
+    
     }
-    
-    
 }

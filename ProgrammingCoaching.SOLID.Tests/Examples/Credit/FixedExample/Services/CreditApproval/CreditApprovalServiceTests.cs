@@ -7,69 +7,69 @@ using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExtern
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
 using ProgrammingCoaching.SOLID.Tests.Helpers;
 
-namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.CreditApproval;
-
-public class CreditApprovalServiceTests
+namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.CreditApproval
 {
-    public CreditApprovalServiceTests()
+    public class CreditApprovalServiceTests
     {
+        public CreditApprovalServiceTests()
+        {
         
-    }
+        }
     
-    DataCredit _dataCredit = new DataCredit();
+        DataCredit _dataCredit = new DataCredit();
     
-    [Test]
-    public void CanGetCreditByRatingCalculationByInternal_True()
-    {
+        [Test]
+        public void CanGetCreditByRatingCalculationByInternal_True()
+        {
         
-        var registeredInternalBetterRating = _dataCredit.Users
-            .Where(user => 
-                _dataCredit.CreditRatingUsersExternals.Any(external => 
-                    external.NationalIdentificationID == user.NationalIdentificationID && 
-                    !external.IsBlackListed && 
-                    external.CreditRating < 100
-                ) &&
-                _dataCredit.RegistredUsers.Any(internalUser => 
-                    internalUser.NationalIdentificationID == user.NationalIdentificationID && 
-                    internalUser.InternalCreditRating > 900 && 
-                    !internalUser.IsBlackListed
+            var registeredInternalBetterRating = _dataCredit.Users
+                .Where(user => 
+                    _dataCredit.CreditRatingUsersExternals.Any(external => 
+                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        !external.IsBlackListed && 
+                        external.CreditRating < 100
+                    ) &&
+                    _dataCredit.RegistredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                        internalUser.InternalCreditRating > 900 && 
+                        !internalUser.IsBlackListed
+                    )
                 )
-            )
-            .Take(5)
-            .ToList();
+                .Take(5)
+                .ToList();
 
-        foreach (var user in registeredInternalBetterRating)
-        {
-            CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
+            foreach (var user in registeredInternalBetterRating)
+            {
+                CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
             
-            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+                CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
-            creditApplicationModel.CreditType = randomEnumValue;
-            creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
-            creditApplicationModel.WantToRegister = true;
-            creditApplicationModel.Address = user.Address;
-            creditApplicationModel.Name = user.Name;
-            creditApplicationModel.PhoneNumber = "555-555-5555";
-            creditApplicationModel.Amount = 104;
-            creditApplicationModel.CalculationTypeOfRating = CalculationTypeOfRating.Internal;
+                creditApplicationModel.CreditType = randomEnumValue;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.WantToRegister = true;
+                creditApplicationModel.Address = user.Address;
+                creditApplicationModel.Name = user.Name;
+                creditApplicationModel.PhoneNumber = "555-555-5555";
+                creditApplicationModel.Amount = 104;
+                creditApplicationModel.CalculationTypeOfRating = CalculationTypeOfRating.Internal;
             
-            // Arrange
-            IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
+                // Arrange
+                IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
             
-            IUserExternalService userExternalService = new UserExternalService(_dataCredit);
+                IUserExternalService userExternalService = new UserExternalService(_dataCredit);
             
-            IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
+                IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
             
-            IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
+                IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
             
-            ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
-            // Act
-            var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
+                ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
+                // Act
+                var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
             
-            // Assert
-            Assert.IsTrue(result);
+                // Assert
+                Assert.IsTrue(result);
             
-        }
+            }
         
         
         
@@ -79,75 +79,75 @@ public class CreditApprovalServiceTests
        
 
         
-    }
-
-    public IUserRatingService GetTypeOfRatingService(CalculationTypeOfRating calculationTypeOfRating)
-    {
-        
-        if (calculationTypeOfRating == CalculationTypeOfRating.Internal)
-        {
-            return new UserRatingInternalIfExistentService();
         }
+
+        public IUserRatingService GetTypeOfRatingService(CalculationTypeOfRating calculationTypeOfRating)
+        {
         
-        return new UserRatingUserBetterRatingService();
-    }
+            if (calculationTypeOfRating == CalculationTypeOfRating.Internal)
+            {
+                return new UserRatingInternalIfExistentService();
+            }
+        
+            return new UserRatingUserBetterRatingService();
+        }
    
     
-     [Test]
-    public void CanGetCreditByRatingCalculationByInternal_False()
-    {
-        // Arrange
-        var registeredInternalBetterRating = _dataCredit.Users
-            .Where(user => 
-                _dataCredit.CreditRatingUsersExternals.Any(external => 
-                    external.NationalIdentificationID == user.NationalIdentificationID && 
-                    !external.IsBlackListed && 
-                    external.CreditRating > 900
-                ) &&
-                _dataCredit.RegistredUsers.Any(internalUser => 
-                    internalUser.NationalIdentificationID == user.NationalIdentificationID && 
-                    internalUser.InternalCreditRating < 10 && 
-                    !internalUser.IsBlackListed
-                )
-            )
-            .Take(5)
-            .ToList();
-
-        foreach (var user in registeredInternalBetterRating)
+        [Test]
+        public void CanGetCreditByRatingCalculationByInternal_False()
         {
-            CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
+            // Arrange
+            var registeredInternalBetterRating = _dataCredit.Users
+                .Where(user => 
+                    _dataCredit.CreditRatingUsersExternals.Any(external => 
+                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        !external.IsBlackListed && 
+                        external.CreditRating > 900
+                    ) &&
+                    _dataCredit.RegistredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                        internalUser.InternalCreditRating < 10 && 
+                        !internalUser.IsBlackListed
+                    )
+                )
+                .Take(5)
+                .ToList();
+
+            foreach (var user in registeredInternalBetterRating)
+            {
+                CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
             
-            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+                CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
-            creditApplicationModel.CreditType = randomEnumValue;
-            creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
-            creditApplicationModel.WantToRegister = true;
-            creditApplicationModel.Address = user.Address;
-            creditApplicationModel.Name = user.Name;
-            creditApplicationModel.PhoneNumber = "555-555-5555";
-            creditApplicationModel.Amount = 1004;
+                creditApplicationModel.CreditType = randomEnumValue;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.WantToRegister = true;
+                creditApplicationModel.Address = user.Address;
+                creditApplicationModel.Name = user.Name;
+                creditApplicationModel.PhoneNumber = "555-555-5555";
+                creditApplicationModel.Amount = 1004;
             
             
-            CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
+                CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
             
-            creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
+                creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
             
-            IUserRatingService userRatingService = GetTypeOfRatingService(calculationTypeOfRating);
+                IUserRatingService userRatingService = GetTypeOfRatingService(calculationTypeOfRating);
             
-            IUserExternalService userExternalService = new UserExternalService(_dataCredit);
+                IUserExternalService userExternalService = new UserExternalService(_dataCredit);
             
-            IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
+                IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
             
-            IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
+                IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
             
-            ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
-            // Act
-            var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
+                ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
+                // Act
+                var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
             
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.IsFalse(result);
             
-        }
+            }
         
         
         
@@ -157,6 +157,7 @@ public class CreditApprovalServiceTests
        
 
         
+        }
     }
 }
 

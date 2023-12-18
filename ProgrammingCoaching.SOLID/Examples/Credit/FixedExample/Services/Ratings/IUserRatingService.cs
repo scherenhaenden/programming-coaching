@@ -1,10 +1,11 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
-
-public interface IUserRatingService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings
 {
-    double GetRating(double internalRating, double externalRating);
+    public interface IUserRatingService
+    {
+        double GetRating(double internalRating, double externalRating);
     
-    double GetRating(ExtendedUserInformation extendedUserInformationg);
+        double GetRating(ExtendedUserInformation extendedUserInformationg);
+    }
 }

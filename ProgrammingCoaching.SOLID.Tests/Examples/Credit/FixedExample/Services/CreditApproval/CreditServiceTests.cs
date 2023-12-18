@@ -4,33 +4,34 @@ using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListe
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.CreditApproval;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
 
-namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.CreditApproval;
-
-[TestFixture]
-public class CreditServiceTests
+namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.CreditApproval
 {
-    DataCredit _db = new DataCredit();
-    
-    [Test]
-    public void CanGetCreditByRatingCalculationByInternal()
+    [TestFixture]
+    public class CreditServiceTests
     {
-        // Arrange
-       /* CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
-        
-        creditApplicationModel.CreditType = CreditType.Internal;
-        
-        
-        
-        IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
-        
-        ICreditService creditService = new CreditService(new BlacklistedService(), userRatingService, new ConditionRatings(_db));
-        
+        DataCredit _db = new DataCredit();
     
+        [Test]
+        public void CanGetCreditByRatingCalculationByInternal()
+        {
+            // Arrange
+            /* CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
 
-        // Act
-        var result = creditService.CanGetCreditByRatingCalculation(creditApplicationModel, extendedUserInformation);*/
+             creditApplicationModel.CreditType = CreditType.Internal;
 
-        // Assert
-        //Assert.IsFalse(result);
+
+
+             IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
+
+             ICreditService creditService = new CreditService(new BlacklistedService(), userRatingService, new ConditionRatings(_db));
+
+
+
+             // Act
+             var result = creditService.CanGetCreditByRatingCalculation(creditApplicationModel, extendedUserInformation);*/
+
+            // Assert
+            //Assert.IsFalse(result);
+        }
     }
 }

@@ -1,9 +1,9 @@
-using ProgrammingCoaching.SOLID.Data.DummyData;
-using ProgrammingCoaching.SOLID.Data.Models;
+using ProgrammingCoaching.SOLID.Examples.AutoLeasing.Data.DummyData;
+using ProgrammingCoaching.SOLID.Examples.AutoLeasing.Data.Models;
 
-namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
-
-public class CarFilterService {
+namespace ProgrammingCoaching.SOLID.Examples.AutoLeasing.FixedExample
+{
+  public class CarFilterService {
     private readonly List<CarModel> _cars = new MockedModels().Cars;
 
     public List<CarModel> FilterCars(CarFilterOptions options) {
@@ -47,4 +47,5 @@ public class CarFilterService {
          
         return filteredCars;
     }
+  }
 }

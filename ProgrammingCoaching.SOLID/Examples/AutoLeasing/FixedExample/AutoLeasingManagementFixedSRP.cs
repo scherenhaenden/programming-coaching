@@ -1,21 +1,21 @@
-using ProgrammingCoaching.SOLID.Data.Models;
+using ProgrammingCoaching.SOLID.Examples.AutoLeasing.Data.Models;
 
-namespace ProgrammingCoaching.SOLID.SinglesResponsabilityPattern.FixedExample;
-
-public class AutoLeasingManagementFixedSRP
+namespace ProgrammingCoaching.SOLID.Examples.AutoLeasing.FixedExample
 {
-    private readonly UserManager _userManager;
-    private readonly CarFilterService _carFilterService;
-    private readonly DiscountService _discountService;
+    public class AutoLeasingManagementFixedSRP
+    {
+        private readonly UserManager _userManager;
+        private readonly CarFilterService _carFilterService;
+        private readonly DiscountService _discountService;
 
-    public AutoLeasingManagementFixedSRP() {
+        public AutoLeasingManagementFixedSRP() {
         _userManager = new UserManager();
         _carFilterService = new CarFilterService();
         _discountService = new DiscountService();
     }
     
     
-    public List<CarModel> GetAvailableCarsOnRequest(string userLogin, CarFilterOptions options, double possibleDiscount) {
+        public List<CarModel> GetAvailableCarsOnRequest(string userLogin, CarFilterOptions options, double possibleDiscount) {
         var cars = _carFilterService.FilterCars(options);
 
         if (options.TryDiscount) {
@@ -30,7 +30,7 @@ public class AutoLeasingManagementFixedSRP
     }
     
     
-    public ResponseModel<List<CarModel>> GetAvailableCarsOnRequestWithResponseModel(string userLogin, CarFilterOptions options, double possibleDiscount) {
+        public ResponseModel<List<CarModel>> GetAvailableCarsOnRequestWithResponseModel(string userLogin, CarFilterOptions options, double possibleDiscount) {
         var cars = _carFilterService.FilterCars(options);
 
         if (options.TryDiscount) {
@@ -47,5 +47,6 @@ public class AutoLeasingManagementFixedSRP
         }
 
         return new ResponseModel<List<CarModel>>(cars);
+    }
     }
 }

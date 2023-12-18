@@ -1,21 +1,21 @@
 using Bogus;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample;
-
-public class CreditManagementTakeBetterRating
+namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
 {
-    private readonly DataCredit _db;
+    public class CreditManagementTakeBetterRating
+    {
+        private readonly DataCredit _db;
 
-    public CreditManagementTakeBetterRating(DataCredit db)
+        public CreditManagementTakeBetterRating(DataCredit db)
     {
         _db = db;
     }
     
 
-    private User Users;
+        private User Users;
     
-    public bool CanCreditBeGiven(string userNationalId, double amount, CreditType typeOfCredit,  string name, string address, string contactDetails, bool? wantToRegister)
+        public bool CanCreditBeGiven(string userNationalId, double amount, CreditType typeOfCredit,  string name, string address, string contactDetails, bool? wantToRegister)
     {
         // verify user is registered in the system
         DataCredit db = _db;
@@ -148,4 +148,5 @@ public class CreditManagementTakeBetterRating
         }
     }
 
+    }
 }

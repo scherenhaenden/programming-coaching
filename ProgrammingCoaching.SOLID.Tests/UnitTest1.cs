@@ -1,15 +1,16 @@
-namespace ProgrammingCoaching.SOLID.Tests;
-
-public class Tests
+namespace ProgrammingCoaching.SOLID.Tests
 {
-    [SetUp]
-    public void Setup()
+    public class Tests
+    {
+        [SetUp]
+        public void Setup()
     {
     }
 
-    [Test]
-    public void Test1()
+        [Test]
+        public void Test1()
     {
         Assert.Pass();
+    }
     }
 }

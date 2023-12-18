@@ -1,20 +1,21 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
-
-public class UserRatingInternalIfExistentService: IUserRatingService
+namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings
 {
-    public double GetRating(double internalRating, double externalRating)
+    public class UserRatingInternalIfExistentService: IUserRatingService
     {
-        if (internalRating > 0)
+        public double GetRating(double internalRating, double externalRating)
         {
-            return internalRating;
+            if (internalRating > 0)
+            {
+                return internalRating;
+            }
+            return externalRating;
         }
-        return externalRating;
-    }
  
-    public double GetRating(ExtendedUserInformation extendedUserInformation)
-    {
-        return GetRating(extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0, extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0);
+        public double GetRating(ExtendedUserInformation extendedUserInformation)
+        {
+            return GetRating(extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0, extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0);
+        }
     }
 }
