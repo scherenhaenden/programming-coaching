@@ -4,7 +4,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
 
 public interface IUserService
 {
-    RegistredUser? HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister);
+    RegistredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister);
     
     ExtendedUserInformation? GetAllUserInformation(string nationalIdentificationId);
 }

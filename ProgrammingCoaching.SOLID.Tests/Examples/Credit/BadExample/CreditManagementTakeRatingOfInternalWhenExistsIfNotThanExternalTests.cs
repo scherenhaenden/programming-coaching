@@ -1,22 +1,12 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.BadExample;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Tests.Helpers;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.BadExample;
 
 public class CreditManagementTakeRatingOfInternalWhenExistsIfNotThanExternalTests
 {
-    public static class EnumHelper
-    {
-        private static Random random = new Random();
-
-        public static T GetRandomEnumValue<T>() where T : Enum
-        {
-            T[] enumValues = (T[])Enum.GetValues(typeof(T));
-            return enumValues[random.Next(enumValues.Length)];
-        }
-    }
-
-    
+   
     
     [Test]
     public void Test1_CreditShouldBeGiven()
@@ -24,40 +14,75 @@ public class CreditManagementTakeRatingOfInternalWhenExistsIfNotThanExternalTest
         DataCredit dataCredit = new DataCredit();
         
         CreditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal = new CreditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal(dataCredit);
-
-
-        var registedUsersWithHighScoreOnly5 = dataCredit.Users
+        
+        
+        // Get users that are NOT blacklisted
+        // The users should be intern registered and have a high score
+        // The users should have a very low external score to prove that the are getting the credit by the internal score first
+        
+        var registeredInternalBetterRating = dataCredit.Users
+            .Where(user => 
+                dataCredit.CreditRatingUsersExternals.Any(external => 
+                    external.NationalIdentificationID == user.NationalIdentificationID && 
+                    !external.IsBlackListed && 
+                    external.CreditRating < 100
+                ) &&
+                dataCredit.RegistredUsers.Any(internalUser => 
+                    internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    internalUser.InternalCreditRating > 900 && 
+                    !internalUser.IsBlackListed
+                )
+            )
+            .Take(5)
+            .ToList();
+        
+        
+        foreach (var user in registeredInternalBetterRating)
+        {
+            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+            
+            var result1 = creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal.CanCreditBeGiven(user.NationalIdentificationID, 104, randomEnumValue, "John Doe", "123 Main St", "555-555-5555", true);
+        
+            Assert.IsTrue(result1);
+        }
+        
+        
+        // Get users that are NOT blacklisted
+        // The users should NOT be intern registered
+        // The users should have a very hgh external score to prove that the are getting the credit by the external score
+        
+        var unRegisteredBetterExternalRatingBeingRegistered = dataCredit.Users
             .Where(x => dataCredit.CreditRatingUsersExternals.Any(y =>
-                y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false))
-            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID && y.InternalCreditRating > 900
-            && y.IsBlackListed == false
+                y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false && y.CreditRating > 900))
+            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID
+                && y.IsBlackListed == false
             )).Take(5).ToList();
         
-        // users that are in Users but not in RegistredUsers get external information
-        var notRegistredWithHighScoreOnly5 = dataCredit.Users
-            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID))
+        foreach (var user in unRegisteredBetterExternalRatingBeingRegistered)
+        {
+            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+            
+            var result1 = creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal.CanCreditBeGiven(user.NationalIdentificationID, 104, randomEnumValue, "John Doe", "123 Main St", "555-555-5555", true);
+        
+            Assert.IsTrue(result1);
+        }
+        
+        var unRegisteredBetterExternalRatingNotBeingRegistered = dataCredit.Users
             .Where(x => dataCredit.CreditRatingUsersExternals.Any(y =>
-                y.NationalIdentificationID == x.NationalIdentificationID && y.CreditRating > 900 && y.IsBlackListed == false)).Take(5)
+                y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false && y.CreditRating > 900))
+            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID
+                                                            && y.IsBlackListed == false
+            )).Take(5).ToList();
+        
+        foreach (var user in unRegisteredBetterExternalRatingNotBeingRegistered)
+        {
+            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
-            .ToList();
+            var result1 = creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal.CanCreditBeGiven(user.NationalIdentificationID, 100, randomEnumValue, "John Doe", "123 Main St", "555-555-5555", false);
+        
+            Assert.IsTrue(result1);
+        }
 
-        foreach (var registedUser in registedUsersWithHighScoreOnly5)
-        {
-            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
-            
-            var result1 = creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal.CanCreditBeGiven(registedUser.NationalIdentificationID, 104, randomEnumValue, "John Doe", "123 Main St", "555-555-5555", true);
-        
-            Assert.IsTrue(result1);
-        }
-        
-        foreach (var notregistredUser in notRegistredWithHighScoreOnly5)
-        {
-            CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
-            
-            var result1 = creditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal.CanCreditBeGiven(notregistredUser.NationalIdentificationID, 104, randomEnumValue, "John Doe", "123 Main St", "555-555-5555", true);
-        
-            Assert.IsTrue(result1);
-        }
         //create addresses with bogus
     }
     

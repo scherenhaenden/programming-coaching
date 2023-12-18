@@ -12,4 +12,14 @@ public class CreditApplicationModel
     public string Address { get; set; }
     public string PhoneNumber { get; set; }
     public bool WantToRegister { get; set; }
+    
+    public CalculationTypeOfRating CalculationTypeOfRating { get; set; }
+    
+}
+
+public enum CalculationTypeOfRating
+{
+    Internal,
+    External,
+    BetterOfInternalOrExternal,
 }

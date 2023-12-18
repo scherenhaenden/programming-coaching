@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <Folder Include="AntiPattern\" />
-      <Folder Include="Examples\AutoLeasing\" />
       <Folder Include="Examples\Credit\BetterExample\" />
     </ItemGroup>
 

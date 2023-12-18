@@ -30,7 +30,6 @@
     <ItemGroup>
       <Folder Include="AntiPattern\" />
       <Folder Include="AntiPattern\BadExample\AutoLeasing\" />
-      <Folder Include="Examples\Credit\FixedExample\Services\UserExternal\" />
     </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Rating
 
 public interface IConditionRatings
 {
-    CreditConditions? GetConditionsForCreditType(CreditType creditType);
+    CreditConditions GetConditionsForCreditType(CreditType creditType);
     
     bool IsRatingCoveredInCondition(CreditConditions creditConditions, double rating);
     

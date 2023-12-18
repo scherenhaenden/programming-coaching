@@ -1,7 +1,7 @@
 using ProgrammingCoaching.SOLID.Data.DummyData;
 using ProgrammingCoaching.SOLID.Data.Models;
 
-namespace ProgrammingCoaching.SOLID.AntiPattern.BadExample.AutoLeasing;
+namespace ProgrammingCoaching.SOLID.Examples.AutoLeasing.BadExample;
 
 public class AutoLeasingManagementBad
 {

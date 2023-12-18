@@ -12,9 +12,9 @@ public class UserRatingInternalIfExistentService: IUserRatingService
         }
         return externalRating;
     }
-
+ 
     public double GetRating(ExtendedUserInformation extendedUserInformation)
     {
-        return GetRating(extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0, extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0);
+        return GetRating(extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0, extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0);
     }
 }

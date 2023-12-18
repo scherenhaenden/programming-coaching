@@ -1,4 +1,6 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Models;
+using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListed;
+using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.CreditApproval;
@@ -8,9 +10,10 @@ public class CreditApprovalService: ICreditApprovalService
     private readonly IUserService _userService;
     private readonly ICreditService _creditService;
 
-    public CreditApprovalService(IUserService userService)
+    public CreditApprovalService(IUserService userService, IBlacklistedService blacklistedService, IUserRatingService userRatingService, IConditionRatings conditionRatings)
     {
         _userService = userService;
+        _creditService = new CreditService(blacklistedService, userRatingService, conditionRatings);
     }
     
     public bool CanCreditBeGiven(CreditApplicationModel creditApplicationModel)
@@ -25,20 +28,11 @@ public class CreditApprovalService: ICreditApprovalService
         {
             return false;
         }
-            
         
         var userInformation = _userService.GetAllUserInformation(registered?.NationalIdentificationID);
         
-        // 2. Check if user is eligible for credit
-        // 2.1 is blacklisted?
-        
-        
-
-        // if yes, return true
+        return _creditService.CanGetCreditByRatingCalculation(creditApplicationModel, userInformation);
        
-        
-        
-        throw new NotImplementedException();
     }
     
     

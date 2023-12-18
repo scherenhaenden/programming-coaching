@@ -1,20 +1,12 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.BadExample;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Tests.Helpers;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.BadExample;
 
 public class CreditManagementTakeBetterRatingTests
 {
-    public static class EnumHelper
-    {
-        private static Random random = new Random();
-
-        public static T GetRandomEnumValue<T>() where T : Enum
-        {
-            T[] enumValues = (T[])Enum.GetValues(typeof(T));
-            return enumValues[random.Next(enumValues.Length)];
-        }
-    }
+    
 
     
     
@@ -25,37 +17,34 @@ public class CreditManagementTakeBetterRatingTests
         
         CreditManagementTakeBetterRating creditManagementTakeBetterRating = new CreditManagementTakeBetterRating(dataCredit);
         
-        var notBlacklistedInternal =dataCredit.RegistredUsers.Where(x => x.IsBlackListed == false).ToList();
+        // Get users that are NOT blacklisted
+        // The users should be intern registered and have a high score
+        // The users should have a very low external score to prove that the are getting the credit by the internal score first
         
-        var notBlacklistedExternal =dataCredit.CreditRatingUsersExternals.Where(x => x.IsBlackListed == false).ToList();
-        
-        // users that are in Users but not in RegistredUsers get external information
-        
-        
-        
-        var registeredInternalBetterRatingV1 = dataCredit.Users
-            .Where(x => dataCredit.CreditRatingUsersExternals.Any(y =>
-                y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false && y.CreditRating < 100))
-            .Where(x => dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID && y.InternalCreditRating > 900
-                && y.IsBlackListed == false
-            )).Take(5).ToList();
-
-
         var registeredInternalBetterRating = dataCredit.Users
-            .Where(x => dataCredit.CreditRatingUsersExternals.Any(y =>
-                y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false && y.CreditRating < 100))
-            .Where(x => dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID && y.InternalCreditRating > 900
-                && y.IsBlackListed == false
-            )).Take(5).ToList();
-        
-        // update the credit rating of the user to be better than 900
-        
-        
-        // users that are in Users but not in RegistredUsers get external information
+            .Where(user => 
+                dataCredit.CreditRatingUsersExternals.Any(external => 
+                    external.NationalIdentificationID == user.NationalIdentificationID && 
+                    !external.IsBlackListed && 
+                    external.CreditRating < 100
+                ) &&
+                dataCredit.RegistredUsers.Any(internalUser => 
+                    internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    internalUser.InternalCreditRating > 900 && 
+                    !internalUser.IsBlackListed
+                )
+            )
+            .Take(5)
+            .ToList();
+
+        // Get users that are NOT blacklisted
+        // The users should NOT be intern registered 
+        // The users should have a very high external score 
+       
         var registeredBetterExternalRating = dataCredit.Users
             .Where(x => dataCredit.CreditRatingUsersExternals.Any(y =>
                 y.NationalIdentificationID == x.NationalIdentificationID && y.IsBlackListed == false && y.CreditRating > 900))
-            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID && y.InternalCreditRating < 40
+            .Where(x => !dataCredit.RegistredUsers.Any(y => y.NationalIdentificationID == x.NationalIdentificationID
                 && y.IsBlackListed == false
             )).Take(5).ToList();
 

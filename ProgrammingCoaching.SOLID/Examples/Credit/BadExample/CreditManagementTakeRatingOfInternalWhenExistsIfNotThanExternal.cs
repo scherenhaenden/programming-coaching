@@ -127,7 +127,7 @@ public class CreditManagementTakeRatingOfInternalWhenExistsIfNotThanExternal
             
             var amountAsDecimal = (decimal)amount;
             var result = myConditions.ToList()
-                .Where(a => a.Key <= amountAsDecimal)
+                .Where(a => a.Key >= amountAsDecimal)
                 .OrderByDescending(a => a.Key)
                 .FirstOrDefault();
            

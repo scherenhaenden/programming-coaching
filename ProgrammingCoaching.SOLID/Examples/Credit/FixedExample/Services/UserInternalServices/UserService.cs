@@ -17,7 +17,7 @@ public class UserService: IUserService
     }
  
 
-    public RegistredUser? HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
+    public RegistredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
     {
         var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
         
@@ -25,9 +25,9 @@ public class UserService: IUserService
         {
             if (wantToRegister)
             {
-                return _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId);
+                return _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId)!;
             }
-            return _userRegisteredDataService.RegisterUserWithoutBankAccountAndGetReisteredUser(nationalIdentificationId);
+            return _userRegisteredDataService.RegisterUserWithoutBankAccountAndGetReisteredUser(nationalIdentificationId)!;
             
         }
 

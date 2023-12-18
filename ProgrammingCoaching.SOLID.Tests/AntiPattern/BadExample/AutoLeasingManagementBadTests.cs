@@ -1,5 +1,5 @@
-using ProgrammingCoaching.SOLID.AntiPattern.BadExample.AutoLeasing;
 using ProgrammingCoaching.SOLID.Data.DummyData;
+using ProgrammingCoaching.SOLID.Examples.AutoLeasing.BadExample;
 
 namespace ProgrammingCoaching.SOLID.Tests.AntiPattern.BadExample
 {

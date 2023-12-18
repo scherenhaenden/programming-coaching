@@ -11,9 +11,11 @@ public class ConditionRatings: IConditionRatings
         _db = db;
     }
     
-    public CreditConditions? GetConditionsForCreditType(CreditType creditType)
+    // Since this is a enum, there is no way to test for null in real life.
+    // In real life we would also use a database to get the data and not an enum.
+    public CreditConditions GetConditionsForCreditType(CreditType creditType)
     {
-        return _db.CreditConditions.FirstOrDefault(x => x.CreditType == creditType);
+        return _db.CreditConditions.First(x => x.CreditType == creditType);
     }
 
     public bool IsRatingCoveredInCondition(CreditConditions creditConditions, double rating)
@@ -37,11 +39,6 @@ public class ConditionRatings: IConditionRatings
     public bool IsRatingCoveredInCondition(double rating, CreditType creditType)
     {
         var myConditions = GetConditionsForCreditType(creditType);
-        
-        if(myConditions == null)
-        {
-            return false;
-        }
         
         return IsRatingCoveredInCondition(myConditions, rating);
     }
