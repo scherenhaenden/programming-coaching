@@ -17,6 +17,32 @@ Die Klasse `CreditManagementTakeBetterRating` ist dazu konzipiert, festzustellen
 Zusammenfassend bewertet dieser Code im Wesentlichen verschiedene Bedingungen und Kundeninformationen, um festzustellen, ob einem Kunden basierend auf seiner Kreditwürdigkeit und anderen Faktoren ein Kredit gewährt werden kann. Es ist jedoch wichtig zu beachten, dass dieser Code als "schlechtes Beispiel" präsentiert wird und wahrscheinlich Probleme oder Ineffizienzen enthält, die in dieser vereinfachten Erklärung nicht erörtert werden.
 
 
+## Problem der Nicht-Deterministischen Methoden/Funktionen
+
+Im gegebenen Codebeispiel ist das Fehlen von deterministischen Methoden oder Funktionen ein weiteres bedeutendes Problem. Das bedeutet, dass die Methoden bei gleichen Eingaben nicht unbedingt die gleichen Ausgaben oder Effekte produzieren. Dieses Problem kann in folgenden Bereichen des Codes identifiziert werden:
+
+### 1. Datenbankabhängige Logik
+- **Problem:** Der Code hängt stark vom aktuellen Zustand der Datenbank ab. Beispielsweise wird das Ergebnis der `CanCreditBeGiven`-Methode durch die aktuellen Daten in der Datenbank beeinflusst.
+- **Auswirkung:** Dies führt zu einer Situation, in der gleiche Eingabeparameter unterschiedliche Ergebnisse liefern können, abhängig vom Zustand der Datenbank zum Zeitpunkt der Ausführung.
+
+### 2. Zufällige IDs und Daten
+- **Problem:** Der Code verwendet `Guid.NewGuid().ToString()` zur Generierung von Benutzer-IDs und Kontonummern. Dies erzeugt bei jedem Aufruf unterschiedliche Werte.
+- **Auswirkung:** Nicht-deterministische Funktionen erschweren das Testen des Systems, da man nicht vorhersagen kann, welche spezifischen IDs generiert werden. Dies erschwert auch die Nachverfolgung und Analyse von Problemen.
+
+### 3. Ausnahmebehandlung
+- **Problem:** Wie bereits erwähnt, nutzt der Code Ausnahmen für den Kontrollfluss. Die Entscheidung, eine Ausnahme zu werfen, kann auf nicht-deterministischen Bedingungen basieren.
+- **Auswirkung:** Dies führt zu einem nicht vorhersehbaren Verhalten des Programms, da die gleichen Eingaben zu einer normalen Ausführung oder einer Ausnahme führen können.
+
+### 4. Abhängigkeit von Externen Zuständen
+- **Problem:** Der Code scheint von externen Zuständen wie Kreditbewertungen und Blacklist-Status abhängig zu sein, die sich ändern können.
+- **Auswirkung:** Das macht die Funktionalität des Codes nicht deterministisch, da sich das Ergebnis einer Methode über die Zeit ändern kann, selbst wenn die Eingabeparameter gleich bleiben.
+
+### Vorschläge zur Verbesserung:
+- **Deterministische Funktionen Nutzen:** Ersetzen von zufälligen oder extern abhängigen Funktionen durch deterministische Alternativen, wo möglich.
+- **Kontrolle von Externen Abhängigkeiten:** Minimieren oder Kontrollieren der Abhängigkeit von externen Zuständen, etwa durch Verwendung von Schnappschüssen oder festen Testdaten in Testszenarien.
+- **Konsistente Ausnahmebehandlung:** Ausnahmen nur für wirklich außergewöhnliche Zustände verwenden und nicht als Teil des normalen Programmflusses.
+
+
 ## Probleme des Codebeispiels
 
 ### 1. Enge Kopplung mit der Datenbankebene

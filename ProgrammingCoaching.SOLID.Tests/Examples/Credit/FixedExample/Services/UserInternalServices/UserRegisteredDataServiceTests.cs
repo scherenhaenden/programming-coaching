@@ -95,7 +95,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(nationalIdentificationId, result.NationalIdentificationID);
-            Assert.IsNull(result.AccountNumber);
+            Assert.IsTrue(string.IsNullOrEmpty(result.AccountNumber));
             Assert.IsTrue(result.InternalCreditRating >= 0);
             // Add more specific assertions based on your requirements
         }

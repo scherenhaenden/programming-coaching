@@ -50,7 +50,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
                 UserID = Guid.NewGuid().ToString(),
                 NationalIdentificationID = nationalIdentificationId,
                 InternalCreditRating = creditRatingUserExternals?.CreditRating ?? 0,
-                //AccountNumber = Guid.NewGuid().ToString(),
+                AccountNumber = String.Empty,
                 IsBlackListed = creditRatingUserExternals?.IsBlackListed ?? false
             });
             

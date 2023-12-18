@@ -59,10 +59,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             Console.WriteLine("The User will be registered without account");
             db.RegistredUsers.Add(new RegistredUser()
             {
-                UserID = Guid.NewGuid().ToString(),
+                
                 NationalIdentificationID = userNationalId,
-                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,
-                AccountNumber = Guid.NewGuid().ToString(),
+                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                
                 IsBlackListed = false
             });
             
@@ -80,11 +79,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             // return
             Console.WriteLine("The User will be registered without account");
             db.RegistredUsers.Add(new RegistredUser()
-            {
-                UserID = Guid.NewGuid().ToString(),
+            {                
                 NationalIdentificationID = userNationalId,
-                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,
-                AccountNumber = Guid.NewGuid().ToString(),
+                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                
                 IsBlackListed = false
             });
             //Users = db.Users.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
