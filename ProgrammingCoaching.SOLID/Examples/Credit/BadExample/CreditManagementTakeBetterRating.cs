@@ -8,9 +8,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         private readonly DataCredit _db;
 
         public CreditManagementTakeBetterRating(DataCredit db)
-    {
-        _db = db;
-    }
+        {
+            _db = db;
+        }
     
 
         private User Users;

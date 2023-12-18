@@ -5,11 +5,11 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
 {
     public class UserService: IUserService
     {
-        private readonly DataCredit _db;
+        private readonly IDataCredit _db;
         private readonly IUserExternalService _userExternalService;
         private readonly IUserRegisteredDataService _userRegisteredDataService;
 
-        public UserService(DataCredit db, IUserExternalService userExternalService, IUserRegisteredDataService userRegisteredDataService)
+        public UserService(IDataCredit db, IUserExternalService userExternalService, IUserRegisteredDataService userRegisteredDataService)
         {
             _db = db;
             _userExternalService = userExternalService;
@@ -17,7 +17,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
         }
  
 
-        public RegistredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
+        public RegistredUser? HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
         {
             var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
         

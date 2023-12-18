@@ -62,17 +62,24 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         [Test]
         public void RegisterUserAndGetRegisteredUser_ShouldRegisterUserAndReturnRegisteredUser()
         {
+            
+            // Get internalusers that are not registered
+            var value = _dataCredit.Users.Where(u =>
+                    _dataCredit.RegistredUsers.All(ru => ru.NationalIdentificationID != u.NationalIdentificationID))
+                .Take(1)
+                .ToList().First();
+            
             // Arrange
-            string nationalIdentificationId = "56789";
+            string nationalIdentificationId = value.NationalIdentificationID;
 
             // Act
             var result = _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(nationalIdentificationId, result.NationalIdentificationID);
-            Assert.IsNotNull(result.AccountNumber);
-            Assert.IsTrue(result.InternalCreditRating >= 0);
+            Assert.That(result?.NationalIdentificationID, Is.EqualTo(nationalIdentificationId));
+            Assert.IsNotNull(result?.AccountNumber);
+            Assert.IsTrue(result?.InternalCreditRating >= 0);
             // Add more specific assertions based on your requirements
         }
 

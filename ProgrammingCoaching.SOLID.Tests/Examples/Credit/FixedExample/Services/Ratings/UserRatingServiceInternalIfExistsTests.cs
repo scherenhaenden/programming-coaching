@@ -15,8 +15,8 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             var externnalRating = 200;
         
             var result =userRatingService.GetRating(internalRating, externnalRating);
-        
-            Assert.AreEqual(internalRating, result);
+
+            Assert.That(result, Is.EqualTo(internalRating));
         
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
@@ -31,8 +31,8 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 }
             };
             var result2 =userRatingService.GetRating(extendedUserInformation);
-        
-            Assert.AreEqual(internalRating, result2);
+
+            Assert.That(result2, Is.EqualTo(internalRating));
         }
     
         [Test]
@@ -45,8 +45,8 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             var externnalRating = 100;
         
             var result = userRatingService.GetRating(internalRating, externnalRating);
-        
-            Assert.AreEqual(internalRating, result);
+
+            Assert.That(result, Is.EqualTo(internalRating));
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
@@ -60,9 +60,39 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 }
             };
             var result2 =userRatingService.GetRating(extendedUserInformation);
+
+            Assert.That(result2, Is.EqualTo(internalRating));
         
-            Assert.AreEqual(internalRating, result2);
+        }
         
+        [Test]
+        public void Test1_GetgetExternalWhenRatingInternalIsZero()
+        {
+        
+            IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
+        
+            var internalRating = 0;
+            var externnalRating = 200;
+        
+            var result =userRatingService.GetRating(internalRating, externnalRating);
+
+            Assert.That(result, Is.EqualTo(externnalRating));
+        
+        
+            ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
+            {
+                RegistredUser = new RegistredUser()
+                {
+                    InternalCreditRating = internalRating
+                },
+                CreditRatingUserExternals = new CreditRatingUserExternals()
+                {
+                    CreditRating = externnalRating
+                }
+            };
+            var result2 =userRatingService.GetRating(extendedUserInformation);
+
+            Assert.That(result2, Is.EqualTo(externnalRating));
         }
 
     }

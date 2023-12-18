@@ -4,9 +4,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Rating
 {
     public class ConditionRatings: IConditionRatings
     {
-        private readonly DataCredit _db;
+        private readonly IDataCredit _db;
 
-        public ConditionRatings(DataCredit db)
+        public ConditionRatings(IDataCredit db)
         {
             _db = db;
         }

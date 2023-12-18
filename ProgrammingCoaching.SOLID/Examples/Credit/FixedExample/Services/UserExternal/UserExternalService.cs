@@ -2,7 +2,7 @@ using ProgrammingCoaching.SOLID.Examples.Credit.Data;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal
 {
-    public class UserExternalService(DataCredit db) : IUserExternalService
+    public class UserExternalService(IDataCredit db) : IUserExternalService
     {
         public CreditRatingUserExternals? GetCreditRatingUserExternals(string nationalIdentificationId)
     {

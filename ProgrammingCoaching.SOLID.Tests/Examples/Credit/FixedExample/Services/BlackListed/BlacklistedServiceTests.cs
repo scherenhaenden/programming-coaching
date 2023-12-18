@@ -29,13 +29,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             var result = _blacklistedService.GetBlackListStatus(extendedUserInformation);
         
             Assert.IsTrue(result);
-        }
-    
-    
-        [Test]
-        public void GetBlackListStatusShouldNotBe()
-        {
-        
+            
             var extendedUserInformation1 = new ExtendedUserInformation
             {
                 RegistredUser = new RegistredUser
@@ -49,7 +43,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             };
             var result1 = _blacklistedService.GetBlackListStatus(extendedUserInformation1);
         
-            Assert.IsFalse(result1);
+            Assert.IsTrue(result1);
         
         
             var extendedUserInformation2 = new ExtendedUserInformation
@@ -65,7 +59,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             };
             var result2 = _blacklistedService.GetBlackListStatus(extendedUserInformation2);
         
-            Assert.IsFalse(result2);
+            Assert.IsTrue(result2);
+        }
+    
+    
+        [Test]
+        public void GetBlackListStatusShouldNotBe()
+        {
+        
+         
         
             var extendedUserInformation3 = new ExtendedUserInformation
             {

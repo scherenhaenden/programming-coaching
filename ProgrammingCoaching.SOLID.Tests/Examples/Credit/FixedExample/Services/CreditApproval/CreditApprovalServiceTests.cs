@@ -11,12 +11,8 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
 {
     public class CreditApprovalServiceTests
     {
-        public CreditApprovalServiceTests()
-        {
-        
-        }
     
-        DataCredit _dataCredit = new DataCredit();
+        IDataCredit _dataCredit = new DataCredit();
     
         [Test]
         public void CanGetCreditByRatingCalculationByInternal_True()
@@ -54,15 +50,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 creditApplicationModel.CalculationTypeOfRating = CalculationTypeOfRating.Internal;
             
                 // Arrange
-                IUserRatingService userRatingService = new UserRatingInternalIfExistentService();
-            
-                IUserExternalService userExternalService = new UserExternalService(_dataCredit);
-            
-                IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
-            
-                IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
-            
-                ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
+                var creditApprovalService = CreateCreditApprovalService(creditApplicationModel.CalculationTypeOfRating);
                 // Act
                 var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
             
@@ -71,14 +59,20 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             
             }
         
-        
-        
-       
-        
-    
-       
+        }
 
-        
+        private ICreditApprovalService CreateCreditApprovalService(CalculationTypeOfRating calculationTypeOfRating)
+        {
+            IUserRatingService userRatingService = GetTypeOfRatingService(calculationTypeOfRating);
+            
+            IUserExternalService userExternalService = new UserExternalService(_dataCredit);
+            
+            IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
+            
+            IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
+            
+            ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
+            return creditApprovalService;
         }
 
         public IUserRatingService GetTypeOfRatingService(CalculationTypeOfRating calculationTypeOfRating)
@@ -125,22 +119,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
                 creditApplicationModel.PhoneNumber = "555-555-5555";
-                creditApplicationModel.Amount = 1004;
+                creditApplicationModel.Amount = 100004;
+                creditApplicationModel.CalculationTypeOfRating = CalculationTypeOfRating.Internal;
             
             
-                CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
+                //CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
             
-                creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
+                //creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
             
-                IUserRatingService userRatingService = GetTypeOfRatingService(calculationTypeOfRating);
-            
-                IUserExternalService userExternalService = new UserExternalService(_dataCredit);
-            
-                IUserRegisteredDataService userRegisteredDataService = new UserRegisteredDataService(_dataCredit, userExternalService);
-            
-                IUserService userService = new UserService(_dataCredit, userExternalService, userRegisteredDataService);
-            
-                ICreditApprovalService creditApprovalService = new CreditApprovalService(userService, new BlacklistedService(), userRatingService, new ConditionRatings(_dataCredit));
+                var creditApprovalService = CreateCreditApprovalService(creditApplicationModel.CalculationTypeOfRating);
                 // Act
                 var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
             
@@ -149,14 +136,158 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             
             }
         
+        }
         
         
-       
-        
-    
-       
+        [Test]
+        public void BlackListedUserBothSystems_False()
+        {
+            // Arrange
+            var registeredInternalBetterRating = _dataCredit.Users
+                .Where(user => 
+                    _dataCredit.CreditRatingUsersExternals.Any(external => 
+                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.IsBlackListed && 
+                        external.CreditRating > 900
+                    ) &&
+                    _dataCredit.RegistredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                        internalUser.InternalCreditRating < 10 && 
+                        internalUser.IsBlackListed 
+                    )
+                )
+                .Take(5)
+                .ToList();
 
+            foreach (var user in registeredInternalBetterRating)
+            {
+                CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
+            
+                CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+            
+                creditApplicationModel.CreditType = randomEnumValue;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.WantToRegister = true;
+                creditApplicationModel.Address = user.Address;
+                creditApplicationModel.Name = user.Name;
+                creditApplicationModel.PhoneNumber = "555-555-5555";
+                creditApplicationModel.Amount = 100004;
+            
+            
+                CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
+            
+                creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
+            
+                var creditApprovalService = CreateCreditApprovalService(creditApplicationModel.CalculationTypeOfRating);
+                // Act
+                var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
+            
+                // Assert
+                Assert.IsFalse(result);
+            
+            }
+            
+        }
         
+        
+         [Test]
+        public void BlackListedUserExternalSystems_False()
+        {
+            // Arrange
+            var registeredInternalBetterRating = _dataCredit.Users
+                .Where(user => 
+                    _dataCredit.CreditRatingUsersExternals.Any(external => 
+                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.IsBlackListed == true && 
+                        external.CreditRating > 900
+                    ) &&
+                    _dataCredit.RegistredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                        internalUser.InternalCreditRating < 10 && 
+                        !internalUser.IsBlackListed 
+                    )
+                )
+                .Take(5)
+                .ToList();
+
+            foreach (var user in registeredInternalBetterRating)
+            {
+                CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
+            
+                CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+            
+                creditApplicationModel.CreditType = randomEnumValue;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.WantToRegister = true;
+                creditApplicationModel.Address = user.Address;
+                creditApplicationModel.Name = user.Name;
+                creditApplicationModel.PhoneNumber = "555-555-5555";
+                creditApplicationModel.Amount = 100004;
+            
+            
+                CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
+            
+                creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
+            
+                var creditApprovalService = CreateCreditApprovalService(creditApplicationModel.CalculationTypeOfRating);
+                // Act
+                var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
+            
+                // Assert
+                Assert.IsFalse(result);
+            
+            }
+            
+        }
+        
+         [Test]
+        public void BlackListedUserInternalSystems_False()
+        {
+            // Arrange
+            var registeredInternalBetterRating = _dataCredit.Users
+                .Where(user => 
+                    _dataCredit.CreditRatingUsersExternals.Any(external => 
+                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        !external.IsBlackListed && 
+                        external.CreditRating > 900
+                    ) &&
+                    _dataCredit.RegistredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                        internalUser.InternalCreditRating < 10 && 
+                        internalUser.IsBlackListed 
+                    )
+                )
+                .Take(5)
+                .ToList();
+
+            foreach (var user in registeredInternalBetterRating)
+            {
+                CreditApplicationModel creditApplicationModel = new CreditApplicationModel();
+            
+                CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
+            
+                creditApplicationModel.CreditType = randomEnumValue;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.WantToRegister = true;
+                creditApplicationModel.Address = user.Address;
+                creditApplicationModel.Name = user.Name;
+                creditApplicationModel.PhoneNumber = "555-555-5555";
+                creditApplicationModel.Amount = 100004;
+            
+            
+                CalculationTypeOfRating calculationTypeOfRating = EnumHelper.GetRandomEnumValue<CalculationTypeOfRating>();
+            
+                creditApplicationModel.CalculationTypeOfRating = calculationTypeOfRating;
+            
+                var creditApprovalService = CreateCreditApprovalService(creditApplicationModel.CalculationTypeOfRating);
+                // Act
+                var result = creditApprovalService.CanCreditBeGiven(creditApplicationModel);
+            
+                // Assert
+                Assert.IsFalse(result);
+            
+            }
+            
         }
     }
 }
