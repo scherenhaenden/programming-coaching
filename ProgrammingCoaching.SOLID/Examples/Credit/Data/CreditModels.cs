@@ -1,3 +1,5 @@
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
+
 namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
 {
     // Enum for given, pending of denied
@@ -12,7 +14,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
     public class CreditModels
     {
         // Credit conditions
-        CreditConditions CreditConditions { get; set; }
+        CreditConditionsInternalModel CreditConditionsInternalModel { get; set; }
         // Credit Id
         string CreditId { get; set; }
         // Credite state

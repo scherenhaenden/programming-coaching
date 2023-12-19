@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
 {
@@ -17,8 +17,8 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         }
 
         public List<UserExternalModel> ExternalUsers { get; set; }= new List<UserExternalModel>();
-        public List<CreditConditions> CreditConditions { get; set; }= new List<CreditConditions>();
-        public List<CreditRatingUserExternals> CreditRatingUsersExternals { get; set; }= new List<CreditRatingUserExternals>();
-        public List<RegisteredUser> RegisteredUsers { get; set; }= new List<RegisteredUser>();
+        public List<CreditConditionsInternalModel> CreditConditions { get; set; }= new List<CreditConditionsInternalModel>();
+        public List<CreditRatingUserExternalModel> CreditRatingUsersExternals { get; set; }= new List<CreditRatingUserExternalModel>();
+        public List<RegisteredUserInternalModel> RegisteredUsers { get; set; }= new List<RegisteredUserInternalModel>();
     }
 }

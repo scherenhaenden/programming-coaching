@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListed;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.BlackListed
@@ -14,11 +14,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser
+                RegisteredUser = new RegisteredUserInternalModel
                 {
                     IsBlackListed = true
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals
+                CreditRatingUserExternals = new CreditRatingUserExternalModel
                 {
                     IsBlackListed = true
                 }
@@ -33,11 +33,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             
             var extendedUserInformation1 = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser
+                RegisteredUser = new RegisteredUserInternalModel
                 {
                     IsBlackListed = false
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals
+                CreditRatingUserExternals = new CreditRatingUserExternalModel
                 {
                     IsBlackListed = true
                 }
@@ -49,11 +49,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             var extendedUserInformation2 = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser
+                RegisteredUser = new RegisteredUserInternalModel
                 {
                     IsBlackListed = true
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals
+                CreditRatingUserExternals = new CreditRatingUserExternalModel
                 {
                     IsBlackListed = false
                 }
@@ -72,11 +72,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             var extendedUserInformation3 = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser
+                RegisteredUser = new RegisteredUserInternalModel
                 {
                     IsBlackListed = false
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals
+                CreditRatingUserExternals = new CreditRatingUserExternalModel
                 {
                     IsBlackListed = false
                 }

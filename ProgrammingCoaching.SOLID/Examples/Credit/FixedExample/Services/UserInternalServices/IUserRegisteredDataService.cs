@@ -1,14 +1,14 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices
 {
     public interface IUserRegisteredDataService
     {
-        RegisteredUser? GetUserRegistered(string nationalIdentificationId);
+        RegisteredUserInternalModel? GetUserRegistered(string nationalIdentificationId);
     
-        RegisteredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId);
+        RegisteredUserInternalModel? RegisterUserAndGetRegisteredUser(string nationalIdentificationId);
     
-        RegisteredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId);
+        RegisteredUserInternalModel? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId);
     }
 }

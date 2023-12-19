@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices
@@ -18,7 +18,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
         }
  
 
-        public RegisteredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
+        public RegisteredUserInternalModel HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
         {
             var registeredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
         

@@ -1,6 +1,6 @@
 using Bogus;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
 {
@@ -38,7 +38,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         
             if (registeredUser == null && wantToRegister == false)
             {
-                db.RegisteredUsers.Add(new RegisteredUser()
+                db.RegisteredUsers.Add(new RegisteredUserInternalModel()
                 {
                     NationalIdentificationId = userNationalId,
                     InternalCreditRating = db.CreditRatingUsersExternals?.FirstOrDefault(u => u.NationalIdentificationId == userNationalId)?.CreditRating ?? 0,                    
@@ -48,7 +48,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         
             if (registeredUser == null && wantToRegister == true)
             {
-                db.RegisteredUsers.Add(new RegisteredUser()
+                db.RegisteredUsers.Add(new RegisteredUserInternalModel()
                 {                    
                     NationalIdentificationId = userNationalId,
                     InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId).CreditRating,                    

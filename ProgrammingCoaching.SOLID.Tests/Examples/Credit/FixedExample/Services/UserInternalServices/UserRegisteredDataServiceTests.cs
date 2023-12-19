@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices;
 
@@ -41,7 +41,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         {
             // Arrange
             string nationalIdentificationId = "123456";
-            var newUser = new RegisteredUser
+            var newUser = new RegisteredUserInternalModel
             {
                 UserId = "user123",
                 NationalIdentificationId = nationalIdentificationId,

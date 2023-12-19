@@ -1,4 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackListed;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.CreditApproval;

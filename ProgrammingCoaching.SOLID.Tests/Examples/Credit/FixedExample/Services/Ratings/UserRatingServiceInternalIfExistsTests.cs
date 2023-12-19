@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.Ratings
@@ -22,11 +22,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser()
+                RegisteredUser = new RegisteredUserInternalModel()
                 {
                     InternalCreditRating = 100
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals()
+                CreditRatingUserExternals = new CreditRatingUserExternalModel()
                 {
                     CreditRating = 200
                 }
@@ -51,11 +51,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser()
+                RegisteredUser = new RegisteredUserInternalModel()
                 {
                     InternalCreditRating = 200
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals()
+                CreditRatingUserExternals = new CreditRatingUserExternalModel()
                 {
                     CreditRating = 100
                 }
@@ -82,11 +82,11 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegisteredUser = new RegisteredUser()
+                RegisteredUser = new RegisteredUserInternalModel()
                 {
                     InternalCreditRating = internalRating
                 },
-                CreditRatingUserExternals = new CreditRatingUserExternals()
+                CreditRatingUserExternals = new CreditRatingUserExternalModel()
                 {
                     CreditRating = externnalRating
                 }

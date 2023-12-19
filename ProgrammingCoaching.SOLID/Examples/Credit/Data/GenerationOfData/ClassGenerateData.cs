@@ -1,15 +1,15 @@
 using Bogus;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
 {
     public class ClassGenerateData
     {
         public static List<UserExternalModel> Users = new List<UserExternalModel>();
-        public static List<CreditRatingUserExternals> CreditRatingUserExternals = new List<CreditRatingUserExternals>();
+        public static List<CreditRatingUserExternalModel> CreditRatingUserExternals = new List<CreditRatingUserExternalModel>();
     
     
-        public static List<RegisteredUser> RegistredUsers { get; set; } = new List<RegisteredUser>();
+        public static List<RegisteredUserInternalModel> RegistredUsers { get; set; } = new List<RegisteredUserInternalModel>();
     
     
         private static bool _isCreated = false;
@@ -67,7 +67,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
 
         foreach (var unregistered in listsOfUsers[0])
         {
-            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
+            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => unregistered.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
@@ -77,13 +77,13 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         foreach (var registered in listsOfUsers[1])
         {
-            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+            RegistredUsers.Add(new Faker<RegisteredUserInternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => registered.NationalIdentificationId)
                 .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.InternalCreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
-            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
+            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => registered.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
@@ -92,12 +92,12 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         foreach (var both in listsOfUsers[2])
         {
-            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
+            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 10))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             
-            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+            RegistredUsers.Add(new Faker<RegisteredUserInternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
@@ -107,12 +107,12 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         foreach (var both in listsOfUsers[3])
         {
-            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
+            CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(900, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             
-            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+            RegistredUsers.Add(new Faker<RegisteredUserInternalModel>().StrictMode(true)
                 .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
@@ -125,11 +125,11 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
     
     
     
-        public static List<CreditConditions> CreditConditions = new List<CreditConditions>();
+        public static List<CreditConditionsInternalModel> CreditConditions = new List<CreditConditionsInternalModel>();
     
         public static void GenerateStaticCasesConditions()
     {
-        var autoLoanConditions = new CreditConditions(CreditType.AutoLoan, 5000m, 50000m,
+        var autoLoanConditions = new CreditConditionsInternalModel(CreditType.AutoLoan, 5000m, 50000m,
             new Dictionary<decimal, double>
             {
                 { 5000m, 600.0 },
@@ -142,7 +142,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(autoLoanConditions);
         
-        var personalLoanConditions = new CreditConditions(CreditType.PersonalLoan, 2000m, 40000m,
+        var personalLoanConditions = new CreditConditionsInternalModel(CreditType.PersonalLoan, 2000m, 40000m,
             new Dictionary<decimal, double>
             {
                 { 2000m, 680.0 },
@@ -155,7 +155,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(personalLoanConditions);
         
-        var studentLoanConditions = new CreditConditions(CreditType.StudentLoan, 1000m, 100000m,
+        var studentLoanConditions = new CreditConditionsInternalModel(CreditType.StudentLoan, 1000m, 100000m,
             new Dictionary<decimal, double>
             {
                 { 1000m, 650.0 },
@@ -168,7 +168,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
 
         CreditConditions.Add(studentLoanConditions);
         
-        var creditCardConditions = new CreditConditions(CreditType.CreditCard, 500m, 5000m,
+        var creditCardConditions = new CreditConditionsInternalModel(CreditType.CreditCard, 500m, 5000m,
             new Dictionary<decimal, double>
             {
                 { 500m, 600.0 },
@@ -181,7 +181,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(creditCardConditions);
         
-        var businessLoanConditions = new CreditConditions(CreditType.BusinessLoan, 10000m, 1000000m,
+        var businessLoanConditions = new CreditConditionsInternalModel(CreditType.BusinessLoan, 10000m, 1000000m,
             new Dictionary<decimal, double>
             {
                 { 10000m, 720.0 },
@@ -194,7 +194,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(businessLoanConditions);
         
-        var homeEquityLoanConditions = new CreditConditions(CreditType.HomeEquityLoan, 10000m, 500000m,
+        var homeEquityLoanConditions = new CreditConditionsInternalModel(CreditType.HomeEquityLoan, 10000m, 500000m,
             new Dictionary<decimal, double>
             {
                 { 10000m, 680.0 },
@@ -207,7 +207,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(homeEquityLoanConditions);
         
-        var paydayLoanConditions = new CreditConditions(CreditType.PaydayLoan, 100m, 2000m,
+        var paydayLoanConditions = new CreditConditionsInternalModel(CreditType.PaydayLoan, 100m, 2000m,
             new Dictionary<decimal, double>
             {
                 { 100m, 400.0 },
@@ -220,7 +220,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
 
         CreditConditions.Add(paydayLoanConditions);
         
-        var debtConsolidationLoanConditions = new CreditConditions(CreditType.DebtConsolidationLoan, 5000m, 50000m,
+        var debtConsolidationLoanConditions = new CreditConditionsInternalModel(CreditType.DebtConsolidationLoan, 5000m, 50000m,
             new Dictionary<decimal, double>
             {
                 { 5000m, 660.0 },
@@ -233,7 +233,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(debtConsolidationLoanConditions);
         
-        var mortgageConditions = new CreditConditions(CreditType.Mortgage, 50000m, 1000000m,
+        var mortgageConditions = new CreditConditionsInternalModel(CreditType.Mortgage, 50000m, 1000000m,
             new Dictionary<decimal, double>
             {
                 { 50000m, 700.0 },
@@ -246,7 +246,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(mortgageConditions);
         
-        var creditBuilderLoanConditions = new CreditConditions(CreditType.CreditBuilderLoan, 500m, 5000m,
+        var creditBuilderLoanConditions = new CreditConditionsInternalModel(CreditType.CreditBuilderLoan, 500m, 5000m,
             new Dictionary<decimal, double>
             {
                 { 500m, 580.0 },
@@ -259,7 +259,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(creditBuilderLoanConditions);
         
-        var equipmentFinancingConditions = new CreditConditions(CreditType.EquipmentFinancing ,5000m, 500000m,
+        var equipmentFinancingConditions = new CreditConditionsInternalModel(CreditType.EquipmentFinancing ,5000m, 500000m,
             new Dictionary<decimal, double>
             {
                 { 5000m, 650.0 },
@@ -272,7 +272,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
         
         CreditConditions.Add(equipmentFinancingConditions);
         
-        var greenLoanConditions = new CreditConditions(CreditType.GreenLoan, 10000m, 200000m,
+        var greenLoanConditions = new CreditConditionsInternalModel(CreditType.GreenLoan, 10000m, 200000m,
             new Dictionary<decimal, double>
             {
                 { 10000m, 660.0 },

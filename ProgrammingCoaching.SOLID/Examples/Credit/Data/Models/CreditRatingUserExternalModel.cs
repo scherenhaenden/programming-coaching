@@ -1,9 +1,9 @@
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.Models
 {
     /// <summary>
     /// Represents external user credit rating information, including the national identification number (e.g., SSN), credit rating, and blacklisting status.
     /// </summary>
-    public class CreditRatingUserExternals
+    public class CreditRatingUserExternalModel
     {
         /// <summary>
         /// Gets or sets the National Identification Number (e.g., SSN) of the user.

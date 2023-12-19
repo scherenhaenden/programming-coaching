@@ -1,9 +1,9 @@
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.Models
 {
     /// <summary>
 /// Represents the conditions for a credit offering, including credit type, amount limits, interest rate, and repayment terms.
 /// </summary>
-public class CreditConditions
+public class CreditConditionsInternalModel
 {
     /// <summary>
     /// Gets or sets the type of credit (e.g., personal loan, mortgage, credit card, etc.).
@@ -36,7 +36,7 @@ public class CreditConditions
     public int MaximumRepaymentPeriodMonths { get; init; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CreditConditions"/> class with the specified parameters.
+    /// Initializes a new instance of the <see cref="CreditConditionsInternalModel"/> class with the specified parameters.
     /// </summary>
     /// <param name="creditType">The type of credit.</param>
     /// <param name="minimumAmount">The minimum amount for the credit.</param>
@@ -44,7 +44,7 @@ public class CreditConditions
     /// <param name="amountToCreditRating">The mapping of loan amount to minimum required credit rating.</param>
     /// <param name="interestRate">The interest rate for the credit.</param>
     /// <param name="maximumRepaymentPeriodMonths">The maximum repayment period in months.</param>
-    public CreditConditions(
+    public CreditConditionsInternalModel(
         CreditType creditType,
         decimal minimumAmount,
         decimal maximumAmount,

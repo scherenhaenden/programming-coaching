@@ -1,5 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserExternal;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserInternalServices
@@ -15,12 +15,12 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
             _userExternalService = userExternalService;
         }
     
-        public RegisteredUser? GetUserRegistered(string nationalIdentificationId)
+        public RegisteredUserInternalModel? GetUserRegistered(string nationalIdentificationId)
         {
             return _db.RegisteredUsers.SingleOrDefault(u => u.NationalIdentificationId == nationalIdentificationId);
         }
 
-        public RegisteredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
+        public RegisteredUserInternalModel? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
         {
             var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
             
@@ -29,7 +29,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
                 return null;
             }
             
-            _db.RegisteredUsers.Add(new RegisteredUser()
+            _db.RegisteredUsers.Add(new RegisteredUserInternalModel()
             {
                 NationalIdentificationId = nationalIdentificationId,
                 InternalCreditRating = creditRatingUserExternals?.CreditRating ?? 0,
@@ -39,11 +39,11 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
             return GetUserRegistered(nationalIdentificationId);
         }
     
-        public RegisteredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
+        public RegisteredUserInternalModel? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
         {
             var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
             
-            _db.RegisteredUsers.Add(new RegisteredUser()
+            _db.RegisteredUsers.Add(new RegisteredUserInternalModel()
             {
                 NationalIdentificationId = nationalIdentificationId,
                 InternalCreditRating = creditRatingUserExternals?.CreditRating ?? 0,

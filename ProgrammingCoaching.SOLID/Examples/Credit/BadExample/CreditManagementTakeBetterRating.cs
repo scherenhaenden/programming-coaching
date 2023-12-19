@@ -1,6 +1,6 @@
 using Bogus;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
-using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
 {
@@ -54,7 +54,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         if (registredUser == null && wantToRegister == false)
         {
             Console.WriteLine("The User will be registered without account");
-            db.RegisteredUsers.Add(new RegisteredUser()
+            db.RegisteredUsers.Add(new RegisteredUserInternalModel()
             {
                 
                 NationalIdentificationId = userNationalId,
@@ -70,7 +70,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             // add user to database
             // return
             Console.WriteLine("The User will be registered without account");
-            db.RegisteredUsers.Add(new RegisteredUser()
+            db.RegisteredUsers.Add(new RegisteredUserInternalModel()
             {                
                 NationalIdentificationId = userNationalId,
                 InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId).CreditRating,                

@@ -1,9 +1,9 @@
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.models
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.Models
 {
     /// <summary>
     /// Represents a registered user with their personal and account information.
     /// </summary>
-    public class RegisteredUser
+    public class RegisteredUserInternalModel
     {
         /// <summary>
         /// Gets or sets the National Identification Number (e.g., SSN) of the user.

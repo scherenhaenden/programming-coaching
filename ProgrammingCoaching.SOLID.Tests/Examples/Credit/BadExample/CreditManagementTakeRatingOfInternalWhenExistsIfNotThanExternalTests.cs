@@ -1,5 +1,6 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.BadExample;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 using ProgrammingCoaching.SOLID.Tests.Helpers;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.BadExample

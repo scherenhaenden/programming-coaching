@@ -1,4 +1,4 @@
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data;
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.Models;
 
 /// <summary>
 /// Enumerates the types of credit offerings.
