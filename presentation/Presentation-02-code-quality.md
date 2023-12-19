@@ -27,7 +27,7 @@ Eine Schätzung des Zeitverlusts für Entwickler aufgrund von schlecht gestaltet
 - **Code-Refactoring:** 10-20% zusätzliche Zeit.
 - **Gesamt:** 70-120% zusätzlicher Zeitaufwand.
 
-### Bedenken Sie:
+### Bedenken:
 - **Teamdynamik:** Ein eingespieltes Team kann trotz schlechten Codes effizienter arbeiten als ein weniger erfahrenes Team.
 - **Technologische Hilfsmittel:** Moderne Entwicklungswerkzeuge und -praktiken können die Auswirkungen von schlechtem Code mildern.
 - **Art des Projekts:** Bei komplexen, langfristigen Projekten sind die Auswirkungen schlechten Designs gravierender als bei kleineren, kurzfristigen Projekten.

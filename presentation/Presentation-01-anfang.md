@@ -7,7 +7,7 @@
 - Code Qualität
 - Qualität Erhöhung durch welche Maßnahmen
 - Clean Code
-- Deterministische und Atomare Entwicklung
+- Deterministische und Atomare Entwicklung / Beginnend mit Reinen Funktionen
 - SOLID
 
 ## Code Qualität (5 Minuten)
