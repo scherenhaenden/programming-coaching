@@ -1,21 +1,37 @@
-### Erkennen von DIP-Verstößen
+### Auswirkungen von Verstößen gegen das Interface Segregation Principle (ISP) auf die Entwurfsqualität
 
-#### Nicht-Technische Anzeichen (Verstehen des DIP-Verstoßes):
+#### Nicht-Technische Anzeichen (Verstehen von Verstößen gegen das ISP):
 
-- **Direkte Abhängigkeiten zu konkreten Klassen**: Wenn eine Komponente (hoher Grad) direkte Abhängigkeiten zu konkreten Klassen (niedriger Grad) hat, statt von abstrakten Schnittstellen oder Klassen abhängig zu sein, könnte dies auf einen Verstoß gegen das DIP hinweisen.
+- **Große, nicht kohäsive Schnittstellen**: Wenn eine Schnittstelle viele Methoden enthält, die nicht zusammengehören oder von bestimmten Implementierungen nicht benötigt werden, könnte dies auf einen Verstoß gegen das ISP hinweisen.
 
-- **Schwierigkeiten bei der Wiederverwendung von Komponenten**: Wenn es schwer ist, eine Komponente in verschiedenen Kontexten wiederzuverwenden, weil sie starre Abhängigkeiten zu spezifischen Implementierungen hat, kann dies auf DIP-Verletzungen hinweisen.
+- **Dünne oder leere Implementierungen**: Wenn Implementierungen einer Schnittstelle gezwungen sind, leere oder nicht sinnvolle Methoden zu implementieren, kann dies auf ein Problem mit dem ISP hinweisen.
 
-- **Harte Kopplung an Details**: Wenn eine Komponente Details über die Implementierungsdetails anderer Komponenten kennt und darauf angewiesen ist, kann dies auf einen DIP-Verstoß hinweisen.
+- **Verletzung des Single Responsibility Principle (SRP)**: Wenn Klassen, die Schnittstellen implementieren, mehr Verantwortlichkeiten haben, als sie sollten, kann dies auf einen Verstoß gegen das ISP hinweisen.
 
-#### Technische Anzeichen (Erkennen des DIP-Verstoßes im Code):
+#### Technische Anzeichen (Erkennen von Verstößen gegen das ISP im Code):
 
-- **Verwendung von "new" für Konstruktion**: Wenn eine Klasse die "new"-Anweisung verwendet, um Abhängigkeiten direkt zu instanziieren, statt sie über Injektion oder IoC-Container bereitzustellen, könnte dies auf DIP-Verstöße hinweisen.
+- **Überladene Schnittstellen**: Eine Schnittstelle mit vielen Methoden, von denen einige nicht von allen Implementierungen benötigt werden, könnte auf einen ISP-Verstoß hinweisen.
 
-- **Direkte Instanzierung von konkreten Klassen**: Wenn eine Klasse konkrete Klassen direkt instanziiert, anstatt abstrakte Schnittstellen oder Basisklassen zu verwenden, kann dies auf einen DIP-Verstoß hinweisen.
+- **Leere Implementierungen**: Implementierungen von Schnittstellen, die leere Methoden oder Wurf-Ausnahmen enthalten, sind Anzeichen für ein ISP-Problem.
 
-- **Harte Verdrahtung von Abhängigkeiten**: Wenn Abhängigkeiten zwischen Komponenten hart verdrahtet sind, anstatt durch Konstruktorinjektion oder Dependency Injection Frameworks gelöst zu werden, könnte dies auf DIP-Verletzungen hinweisen.
+- **Klassen mit ungenutzten Schnittstellen**: Klassen, die Schnittstellen implementieren, aber einige der Schnittstellenmethoden nie aufrufen oder implementieren, könnten auf ISP-Verstöße hinweisen.
 
-- **Fehlende Schnittstellen oder abstrakte Klassen**: Wenn Klassen und Komponenten keine Schnittstellen oder abstrakten Basisklassen verwenden, um Abhängigkeiten zu kapseln, kann dies auf DIP-Verstöße hinweisen.
+#### Auswirkungen auf die Entwurfsqualität:
 
-- **Verstoß gegen das "Hochrangiges kontra Niedrigrangiges"-Prinzip**: Wenn hochrangige Module von niedrigrangigen Modulen abhängig sind, statt umgekehrt, kann dies auf einen DIP-Verstoß hinweisen.
+- **Niedrige Kohäsion**: Große Schnittstellen mit nicht zusammenhängenden Methoden führen zu geringer Kohäsion, da Implementierungen gezwungen sind, nicht benötigte Methoden zu implementieren.
+
+- **Verletzung des SRP**: ISP-Verstöße können dazu führen, dass Klassen zu viele Verantwortlichkeiten haben, was das Single Responsibility Principle verletzt.
+
+- **Risiko von Code-Fehlern**: Leere oder nicht sinnvolle Methoden in Implementierungen erhöhen das Risiko von Code-Fehlern und inkonsistentem Verhalten.
+
+#### Bewältigung von ISP-Verstößen:
+
+- **Aufteilen von Schnittstellen**: Teilen Sie große Schnittstellen in kleinere, kohäsivere Schnittstellen auf, die nur die Methoden enthalten, die von bestimmten Implementierungen benötigt werden.
+
+- **Verwendung von abstrakten Basisklassen**: Statt viele Schnittstellen zu implementieren, können Sie abstrakte Basisklassen verwenden, die bereits einige gemeinsame Methoden implementieren.
+
+- **Anpassung an das SRP**: Stellen Sie sicher, dass Klassen nur eine klare Verantwortlichkeit haben und keine unnötigen Schnittstellen implementieren müssen.
+
+- **Verwendung von Delegation**: In einigen Fällen kann die Verwendung von Delegation anstelle von direkter Implementierung dazu beitragen, ISP-Probleme zu vermeiden.
+
+ISP-Verstöße können zu inkonsistenten Schnittstellen und schlechter Entwurfsqualität führen, daher ist es wichtig, sie zu erkennen und zu beheben.
