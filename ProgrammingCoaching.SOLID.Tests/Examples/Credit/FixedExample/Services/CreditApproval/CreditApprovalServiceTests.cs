@@ -41,7 +41,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
+                creditApplicationModel.NationalIdentificationId = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -114,7 +114,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
+                creditApplicationModel.NationalIdentificationId = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -166,7 +166,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
+                creditApplicationModel.NationalIdentificationId = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -217,7 +217,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
+                creditApplicationModel.NationalIdentificationId = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -267,7 +267,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
+                creditApplicationModel.NationalIdentificationId = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;

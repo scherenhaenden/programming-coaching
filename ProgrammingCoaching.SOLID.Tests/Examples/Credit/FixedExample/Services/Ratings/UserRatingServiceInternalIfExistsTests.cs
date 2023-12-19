@@ -1,4 +1,5 @@
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
 using ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Ratings;
 
 namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.Ratings

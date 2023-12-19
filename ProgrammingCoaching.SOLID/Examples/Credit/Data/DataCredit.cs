@@ -1,3 +1,6 @@
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
+
 namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
 {
     public class DataCredit: IDataCredit

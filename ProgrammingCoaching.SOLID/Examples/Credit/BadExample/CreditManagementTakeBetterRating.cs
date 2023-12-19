@@ -1,5 +1,6 @@
 using Bogus;
 using ProgrammingCoaching.SOLID.Examples.Credit.Data;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
 
 namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
 {

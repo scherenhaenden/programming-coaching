@@ -19,7 +19,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Credit
             // 1. Check if user is registered if not register it and create a bank account for him
             // if he wants to register
             // if he does not want to register, register him without bank account
-            var registered = userService.HandleDataInformationOfUser(creditApplicationModel.NationalIdentificationID, creditApplicationModel.WantToRegister);
+            var registered = userService.HandleDataInformationOfUser(creditApplicationModel.NationalIdentificationId, creditApplicationModel.WantToRegister);
             
             // Get user Information
             var userInformation = userService.GetAllUserInformation(registered.NationalIdentificationId);

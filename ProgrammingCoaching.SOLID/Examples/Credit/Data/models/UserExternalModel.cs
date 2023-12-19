@@ -1,4 +1,4 @@
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.models
 {
     /// <summary>
     /// Represents a user's external model with personal information.

@@ -1,6 +1,7 @@
 using Bogus;
+using ProgrammingCoaching.SOLID.Examples.Credit.Data.models;
 
-namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
+namespace ProgrammingCoaching.SOLID.Examples.Credit.Data.GenerationOfData
 {
     public class ClassGenerateData
     {
