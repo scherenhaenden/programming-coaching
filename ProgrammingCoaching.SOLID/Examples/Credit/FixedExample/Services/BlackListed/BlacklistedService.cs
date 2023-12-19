@@ -6,7 +6,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.BlackL
     {
         public bool GetBlackListStatus(ExtendedUserInformation extendedUserInformation)
         {
-            return (extendedUserInformation?.RegistredUser?.IsBlackListed ?? true) ||
+            return (extendedUserInformation?.RegisteredUser?.IsBlackListed ?? true) ||
                    (extendedUserInformation?.CreditRatingUserExternals?.IsBlackListed ?? true);
         }
 

@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <Folder Include="Examples\Credit\BetterExample\" />
+      <Folder Include="Examples\Credit\Data\GenerationOfData\" />
     </ItemGroup>
 
     <ItemGroup>

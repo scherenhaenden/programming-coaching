@@ -24,7 +24,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
 
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser()
+                RegisteredUser = new RegisteredUser()
                 {
                     InternalCreditRating = internalRating
                 },
@@ -57,7 +57,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser()
+                RegisteredUser = new RegisteredUser()
                 {
                     InternalCreditRating = internalRating
                 },

@@ -17,32 +17,31 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
         }
  
 
-        public RegistredUser? HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
+        public RegisteredUser HandleDataInformationOfUser(string nationalIdentificationId, bool wantToRegister)
         {
-            var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
+            var registeredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
         
-            if(registredUser == null)
+            if(registeredUser == null)
             {
                 if (wantToRegister)
                 {
                     return _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId)!;
                 }
                 return _userRegisteredDataService.RegisterUserWithoutBankAccountAndGetReisteredUser(nationalIdentificationId)!;
-            
             }
 
-            return registredUser;
+            return registeredUser;
         }
 
         public ExtendedUserInformation? GetAllUserInformation(string nationalIdentificationId)
         {
-            var registredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
+            var registeredUser = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
             var externalInformation = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
-            var user = _db.Users.SingleOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
+            var user = _db.ExternalUsers.SingleOrDefault(u => u.NationalIdentificationId == nationalIdentificationId);
         
             var extendedUserInformation = new ExtendedUserInformation()
             {
-                RegistredUser = registredUser,
+                RegisteredUser = registeredUser,
                 User = user,
                 CreditRatingUserExternals = externalInformation
             };

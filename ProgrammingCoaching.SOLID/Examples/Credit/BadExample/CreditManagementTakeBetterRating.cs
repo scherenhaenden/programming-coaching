@@ -13,18 +13,18 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         }
     
 
-        private User Users;
+        private UserExternalModel _usersExternalModel;
     
         public bool CanCreditBeGiven(string userNationalId, double amount, CreditType typeOfCredit,  string name, string address, string contactDetails, bool? wantToRegister)
-    {
+        {
         // verify user is registered in the system
         DataCredit db = _db;
         
         
         //db.ConnectToDatabase();
         
-        Users = db.Users.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
-        var registredUser = db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == Users.NationalIdentificationID);
+        _usersExternalModel = db.ExternalUsers.FirstOrDefault(u => u.NationalIdentificationId == userNationalId);
+        var registredUser = db.RegisteredUsers.FirstOrDefault(u => u.NationalIdentificationId == _usersExternalModel.NationalIdentificationId);
         bool isCustomer = registredUser != null;
         
         if (registredUser == null && wantToRegister == null)
@@ -52,23 +52,14 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         
         if (registredUser == null && wantToRegister == false)
         {
-            // register user
-            // create a new user
-            // add user to database
-            // return
             Console.WriteLine("The User will be registered without account");
-            db.RegistredUsers.Add(new RegistredUser()
+            db.RegisteredUsers.Add(new RegisteredUser()
             {
                 
-                NationalIdentificationID = userNationalId,
-                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                
+                NationalIdentificationId = userNationalId,
+                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId)!.CreditRating,                
                 IsBlackListed = false
             });
-            
-            //RegistredUsers = db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
-            
-            
-            
         }
         
         if (registredUser == null && wantToRegister == true)
@@ -78,10 +69,10 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             // add user to database
             // return
             Console.WriteLine("The User will be registered without account");
-            db.RegistredUsers.Add(new RegistredUser()
+            db.RegisteredUsers.Add(new RegisteredUser()
             {                
-                NationalIdentificationID = userNationalId,
-                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                
+                NationalIdentificationId = userNationalId,
+                InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId).CreditRating,                
                 IsBlackListed = false
             });
             //Users = db.Users.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
@@ -92,9 +83,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         
         // check if the user is blacklisted somewhere
         var internalInformation =
-            db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == Users.NationalIdentificationID);
+            db.RegisteredUsers.FirstOrDefault(u => u.NationalIdentificationId == _usersExternalModel.NationalIdentificationId);
         var externalInformation =
-            db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == Users.NationalIdentificationID);
+            db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == _usersExternalModel.NationalIdentificationId);
         
         if(internalInformation.IsBlackListed || externalInformation.IsBlackListed)
         {
@@ -124,8 +115,6 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             Console.WriteLine("No conditions found for this type of credit");
             return false;
         }
-        
-        var gh =myConditions.ToList().Select(x => x.Key).ToList();//.ForEach(x => Console.WriteLine(x));
             
         var amountAsDecimal = (decimal)amount;
         var result = myConditions.ToList()
@@ -138,12 +127,10 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
             Console.WriteLine("No conditions found for this type of credit");
             return false;
         }
-        else
-        {
-            Console.WriteLine("Credit can be given");
-            return true;
+
+        Console.WriteLine("Credit can be given");
+        return true;
         }
-    }
 
     }
 }

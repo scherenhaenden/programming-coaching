@@ -40,22 +40,22 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         {
             // Arrange
             string nationalIdentificationId = "123456";
-            var newUser = new RegistredUser
+            var newUser = new RegisteredUser
             {
-                UserID = "user123",
-                NationalIdentificationID = nationalIdentificationId,
+                UserId = "user123",
+                NationalIdentificationId = nationalIdentificationId,
                 InternalCreditRating = 800,
                 AccountNumber = "acc123",
                 IsBlackListed = false
             };
-            _dataCredit.RegistredUsers.Add(newUser);
+            _dataCredit.RegisteredUsers.Add(newUser);
 
             // Act
             var result = _userRegisteredDataService.GetUserRegistered(nationalIdentificationId);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(newUser.UserID, result.UserID);
+            Assert.AreEqual(newUser.UserId, result.UserId);
             // Add more specific assertions based on your requirements
         }
 
@@ -64,20 +64,20 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         {
             
             // Get internalusers that are not registered
-            var value = _dataCredit.Users.Where(u =>
-                    _dataCredit.RegistredUsers.All(ru => ru.NationalIdentificationID != u.NationalIdentificationID))
+            var value = _dataCredit.ExternalUsers.Where(u =>
+                    _dataCredit.RegisteredUsers.All(ru => ru.NationalIdentificationId != u.NationalIdentificationId))
                 .Take(1)
                 .ToList().First();
             
             // Arrange
-            string nationalIdentificationId = value.NationalIdentificationID;
+            string nationalIdentificationId = value.NationalIdentificationId;
 
             // Act
             var result = _userRegisteredDataService.RegisterUserAndGetRegisteredUser(nationalIdentificationId);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.That(result?.NationalIdentificationID, Is.EqualTo(nationalIdentificationId));
+            Assert.That(result?.NationalIdentificationId, Is.EqualTo(nationalIdentificationId));
             Assert.IsNotNull(result?.AccountNumber);
             Assert.IsTrue(result?.InternalCreditRating >= 0);
             // Add more specific assertions based on your requirements
@@ -94,7 +94,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(nationalIdentificationId, result.NationalIdentificationID);
+            Assert.That(result.NationalIdentificationId, Is.EqualTo(nationalIdentificationId));
             Assert.IsTrue(string.IsNullOrEmpty(result.AccountNumber));
             Assert.IsTrue(result.InternalCreditRating >= 0);
             // Add more specific assertions based on your requirements

@@ -18,15 +18,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void CanGetCreditByRatingCalculationByInternal_True()
         {
         
-            var registeredInternalBetterRating = _dataCredit.Users
+            var registeredInternalBetterRating = _dataCredit.ExternalUsers
                 .Where(user => 
                     _dataCredit.CreditRatingUsersExternals.Any(external => 
-                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.NationalIdentificationId == user.NationalIdentificationId && 
                         !external.IsBlackListed && 
                         external.CreditRating < 100
                     ) &&
-                    _dataCredit.RegistredUsers.Any(internalUser => 
-                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    _dataCredit.RegisteredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationId == user.NationalIdentificationId && 
                         internalUser.InternalCreditRating > 900 && 
                         !internalUser.IsBlackListed
                     )
@@ -41,7 +41,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -91,15 +91,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void CanGetCreditByRatingCalculationByInternal_False()
         {
             // Arrange
-            var registeredInternalBetterRating = _dataCredit.Users
+            var registeredInternalBetterRating = _dataCredit.ExternalUsers
                 .Where(user => 
                     _dataCredit.CreditRatingUsersExternals.Any(external => 
-                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.NationalIdentificationId == user.NationalIdentificationId && 
                         !external.IsBlackListed && 
                         external.CreditRating > 900
                     ) &&
-                    _dataCredit.RegistredUsers.Any(internalUser => 
-                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    _dataCredit.RegisteredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationId == user.NationalIdentificationId && 
                         internalUser.InternalCreditRating < 10 && 
                         !internalUser.IsBlackListed
                     )
@@ -114,7 +114,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -143,15 +143,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void BlackListedUserBothSystems_False()
         {
             // Arrange
-            var registeredInternalBetterRating = _dataCredit.Users
+            var registeredInternalBetterRating = _dataCredit.ExternalUsers
                 .Where(user => 
                     _dataCredit.CreditRatingUsersExternals.Any(external => 
-                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.NationalIdentificationId == user.NationalIdentificationId && 
                         external.IsBlackListed && 
                         external.CreditRating > 900
                     ) &&
-                    _dataCredit.RegistredUsers.Any(internalUser => 
-                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    _dataCredit.RegisteredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationId == user.NationalIdentificationId && 
                         internalUser.InternalCreditRating < 10 && 
                         internalUser.IsBlackListed 
                     )
@@ -166,7 +166,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -194,15 +194,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void BlackListedUserExternalSystems_False()
         {
             // Arrange
-            var registeredInternalBetterRating = _dataCredit.Users
+            var registeredInternalBetterRating = _dataCredit.ExternalUsers
                 .Where(user => 
                     _dataCredit.CreditRatingUsersExternals.Any(external => 
-                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.NationalIdentificationId == user.NationalIdentificationId && 
                         external.IsBlackListed == true && 
                         external.CreditRating > 900
                     ) &&
-                    _dataCredit.RegistredUsers.Any(internalUser => 
-                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    _dataCredit.RegisteredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationId == user.NationalIdentificationId && 
                         internalUser.InternalCreditRating < 10 && 
                         !internalUser.IsBlackListed 
                     )
@@ -217,7 +217,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;
@@ -244,15 +244,15 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void BlackListedUserInternalSystems_False()
         {
             // Arrange
-            var registeredInternalBetterRating = _dataCredit.Users
+            var registeredInternalBetterRating = _dataCredit.ExternalUsers
                 .Where(user => 
                     _dataCredit.CreditRatingUsersExternals.Any(external => 
-                        external.NationalIdentificationID == user.NationalIdentificationID && 
+                        external.NationalIdentificationId == user.NationalIdentificationId && 
                         !external.IsBlackListed && 
                         external.CreditRating > 900
                     ) &&
-                    _dataCredit.RegistredUsers.Any(internalUser => 
-                        internalUser.NationalIdentificationID == user.NationalIdentificationID && 
+                    _dataCredit.RegisteredUsers.Any(internalUser => 
+                        internalUser.NationalIdentificationId == user.NationalIdentificationId && 
                         internalUser.InternalCreditRating < 10 && 
                         internalUser.IsBlackListed 
                     )
@@ -267,7 +267,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
                 CreditType randomEnumValue = EnumHelper.GetRandomEnumValue<CreditType>();
             
                 creditApplicationModel.CreditType = randomEnumValue;
-                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationID;
+                creditApplicationModel.NationalIdentificationID = user.NationalIdentificationId;
                 creditApplicationModel.WantToRegister = true;
                 creditApplicationModel.Address = user.Address;
                 creditApplicationModel.Name = user.Name;

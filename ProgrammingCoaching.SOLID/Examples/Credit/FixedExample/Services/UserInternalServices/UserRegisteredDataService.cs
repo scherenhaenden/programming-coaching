@@ -14,12 +14,12 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
             _userExternalService = userExternalService;
         }
     
-        public RegistredUser? GetUserRegistered(string nationalIdentificationId)
+        public RegisteredUser? GetUserRegistered(string nationalIdentificationId)
         {
-            return _db.RegistredUsers.SingleOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
+            return _db.RegisteredUsers.SingleOrDefault(u => u.NationalIdentificationId == nationalIdentificationId);
         }
 
-        public RegistredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
+        public RegisteredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId)
         {
             var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
             
@@ -28,27 +28,23 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
                 return null;
             }
             
-            _db.RegistredUsers.Add(new RegistredUser()
+            _db.RegisteredUsers.Add(new RegisteredUser()
             {
-                UserID = Guid.NewGuid().ToString(),
-                NationalIdentificationID = nationalIdentificationId,
+                NationalIdentificationId = nationalIdentificationId,
                 InternalCreditRating = creditRatingUserExternals?.CreditRating ?? 0,
-                AccountNumber = Guid.NewGuid().ToString(),
                 IsBlackListed = creditRatingUserExternals?.IsBlackListed ?? false
             });
             
             return GetUserRegistered(nationalIdentificationId);
         }
     
-        public RegistredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
+        public RegisteredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId)
         {
-            // muss raus
             var creditRatingUserExternals = _userExternalService.GetCreditRatingUserExternals(nationalIdentificationId);
             
-            _db.RegistredUsers.Add(new RegistredUser()
+            _db.RegisteredUsers.Add(new RegisteredUser()
             {
-                UserID = Guid.NewGuid().ToString(),
-                NationalIdentificationID = nationalIdentificationId,
+                NationalIdentificationId = nationalIdentificationId,
                 InternalCreditRating = creditRatingUserExternals?.CreditRating ?? 0,
                 AccountNumber = String.Empty,
                 IsBlackListed = creditRatingUserExternals?.IsBlackListed ?? false
@@ -56,5 +52,5 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
             
             return GetUserRegistered(nationalIdentificationId);
         }
-        }
+    }
 }

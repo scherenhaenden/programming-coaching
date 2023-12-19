@@ -20,11 +20,11 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Credit
             // if he wants to register
             // if he does not want to register, register him without bank account
             var registered = userService.HandleDataInformationOfUser(creditApplicationModel.NationalIdentificationID, creditApplicationModel.WantToRegister);
-
- 
-
-            var userInformation = userService.GetAllUserInformation(registered.NationalIdentificationID);
+            
+            // Get user Information
+            var userInformation = userService.GetAllUserInformation(registered.NationalIdentificationId);
         
+            // 2. Check if user is eligible for credit
             return _creditService.CanGetCreditByRatingCalculation(creditApplicationModel, userInformation!);
        
         }

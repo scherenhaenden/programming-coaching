@@ -4,10 +4,10 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserIn
 {
     public interface IUserRegisteredDataService
     {
-        RegistredUser? GetUserRegistered(string nationalIdentificationId);
+        RegisteredUser? GetUserRegistered(string nationalIdentificationId);
     
-        RegistredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId);
+        RegisteredUser? RegisterUserAndGetRegisteredUser(string nationalIdentificationId);
     
-        RegistredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId);
+        RegisteredUser? RegisterUserWithoutBankAccountAndGetReisteredUser(string nationalIdentificationId);
     }
 }

@@ -21,19 +21,15 @@ Zusammenfassend bewertet dieser Code im Wesentlichen verschiedene Bedingungen un
 
 Im gegebenen Codebeispiel ist das Fehlen von deterministischen Methoden oder Funktionen ein weiteres bedeutendes Problem. Das bedeutet, dass die Methoden bei gleichen Eingaben nicht unbedingt die gleichen Ausgaben oder Effekte produzieren. Dieses Problem kann in folgenden Bereichen des Codes identifiziert werden:
 
-### 1. Datenbankabhängige Logik
+### . Datenbankabhängige Logik
 - **Problem:** Der Code hängt stark vom aktuellen Zustand der Datenbank ab. Beispielsweise wird das Ergebnis der `CanCreditBeGiven`-Methode durch die aktuellen Daten in der Datenbank beeinflusst.
 - **Auswirkung:** Dies führt zu einer Situation, in der gleiche Eingabeparameter unterschiedliche Ergebnisse liefern können, abhängig vom Zustand der Datenbank zum Zeitpunkt der Ausführung.
 
-### 2. Zufällige IDs und Daten
-- **Problem:** Der Code verwendet `Guid.NewGuid().ToString()` zur Generierung von Benutzer-IDs und Kontonummern. Dies erzeugt bei jedem Aufruf unterschiedliche Werte.
-- **Auswirkung:** Nicht-deterministische Funktionen erschweren das Testen des Systems, da man nicht vorhersagen kann, welche spezifischen IDs generiert werden. Dies erschwert auch die Nachverfolgung und Analyse von Problemen.
-
-### 3. Ausnahmebehandlung
+### . Ausnahmebehandlung
 - **Problem:** Wie bereits erwähnt, nutzt der Code Ausnahmen für den Kontrollfluss. Die Entscheidung, eine Ausnahme zu werfen, kann auf nicht-deterministischen Bedingungen basieren.
 - **Auswirkung:** Dies führt zu einem nicht vorhersehbaren Verhalten des Programms, da die gleichen Eingaben zu einer normalen Ausführung oder einer Ausnahme führen können.
 
-### 4. Abhängigkeit von Externen Zuständen
+### . Abhängigkeit von Externen Zuständen
 - **Problem:** Der Code scheint von externen Zuständen wie Kreditbewertungen und Blacklist-Status abhängig zu sein, die sich ändern können.
 - **Auswirkung:** Das macht die Funktionalität des Codes nicht deterministisch, da sich das Ergebnis einer Methode über die Zeit ändern kann, selbst wenn die Eingabeparameter gleich bleiben.
 

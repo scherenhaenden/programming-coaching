@@ -5,8 +5,8 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.UserEx
     public class UserExternalService(IDataCredit db) : IUserExternalService
     {
         public CreditRatingUserExternals? GetCreditRatingUserExternals(string nationalIdentificationId)
-    {
-        return db?.CreditRatingUsersExternals?.FirstOrDefault(u => u.NationalIdentificationID == nationalIdentificationId);
-    }
+        {
+            return db?.CreditRatingUsersExternals?.FirstOrDefault(u => u.NationalIdentificationId == nationalIdentificationId);
+        }
     }
 }

@@ -13,98 +13,62 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
         }
     
 
-        private User Users;
+        private UserExternalModel? Users;
     
         public bool CanCreditBeGiven(string userNationalId, double amount, CreditType typeOfCredit,  string name, string address, string contactDetails, bool? wantToRegister)
         {
-            // verify user is registered in the system
             DataCredit db = _db;
-        
-        
-            //db.ConnectToDatabase();
-        
-            Users = db.Users.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
-            var registredUser = db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == Users.NationalIdentificationID);
-            bool isCustomer = registredUser != null;
-        
-            if (registredUser == null && wantToRegister == null)
-            {
-                // user is not registered in the system
-                // ask if he wants to be registered
-                // if yes, register him
-                // if no, return
             
-                Console.WriteLine("User is not registered in the system");
+            // verify user is registered in the system
+            Users = db.ExternalUsers.FirstOrDefault(u => u.NationalIdentificationId == userNationalId);
+            var registeredUser = db.RegisteredUsers.FirstOrDefault(u => u.NationalIdentificationId == Users.NationalIdentificationId);
+            bool isCustomer = registeredUser != null;
+        
+            // Begin: handle registration
+            if (registeredUser == null && wantToRegister == null)
+            {
                 throw new Exception("User is not registered in the system; Ask if he wants to be registered");
             }
         
-            if (registredUser == null  && ( name == null && address == null && contactDetails == null))
+            if (registeredUser == null  && ( name == null && address == null && contactDetails == null))
             {
-                // register user
-                // create a new user
-                // add user to database
-                // return
-                Console.WriteLine("User is not registered in the system; we need information about him");
                 throw new Exception("User is not registered in the system; we need the information to register him");
             }
         
-        
-        
-            if (registredUser == null && wantToRegister == false)
+            if (registeredUser == null && wantToRegister == false)
             {
-                // register user
-                // create a new user
-                // add user to database
-                // return
-                Console.WriteLine("The User will be registered without account");
-                db.RegistredUsers.Add(new RegistredUser()
+                db.RegisteredUsers.Add(new RegisteredUser()
                 {
-                    
-                    NationalIdentificationID = userNationalId,
-                    InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                    
+                    NationalIdentificationId = userNationalId,
+                    InternalCreditRating = db.CreditRatingUsersExternals?.FirstOrDefault(u => u.NationalIdentificationId == userNationalId)?.CreditRating ?? 0,                    
                     IsBlackListed = false
                 });
-            
-                //RegistredUsers = db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
-            
-            
-            
             }
         
-            if (registredUser == null && wantToRegister == true)
+            if (registeredUser == null && wantToRegister == true)
             {
-                // register user
-                // create a new user
-                // add user to database
-                // return
-                Console.WriteLine("The User will be registered without account");
-                db.RegistredUsers.Add(new RegistredUser()
+                db.RegisteredUsers.Add(new RegisteredUser()
                 {                    
-                    NationalIdentificationID = userNationalId,
-                    InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId).CreditRating,                    
+                    NationalIdentificationId = userNationalId,
+                    InternalCreditRating = db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId).CreditRating,                    
                     IsBlackListed = false
                 });
                 isCustomer = true;
-            
-                //Users = db.Users.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
-            
             }
-            // find out if the user is on a blacklist
-            // if yes, return
+            // End: handle registration
 
+            // Begin: calculation ob eligibility for credit
             if (isCustomer)
             {
-                var retingInternalUser = db.RegistredUsers.FirstOrDefault(u => u.NationalIdentificationID == Users.NationalIdentificationID);
+                // check if user is blacklisted
+                var retingInternalUser = db.RegisteredUsers.FirstOrDefault(u => u.NationalIdentificationId == Users.NationalIdentificationId);
                 if (retingInternalUser.IsBlackListed)
                 {
-                    Console.WriteLine("User is blacklisted");
-                    //throw new Exception("User is blacklisted");
                     return false;
                 }
 
+                // check if user is eligible for credit based on his credit credit type to conditions
                 var conditionsForTypeOfCredit = db.CreditConditions.FirstOrDefault(x => x.CreditType == typeOfCredit);
-                
-
                 if (conditionsForTypeOfCredit == null)
                 {
                     Console.WriteLine("No conditions found for this type of credit");
@@ -112,7 +76,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
                 }
             
          
-
+                // check if user is eligible for credit based on the amount and his credit rating
                 var myConditions = conditionsForTypeOfCredit.AmountToCreditRating.ToList()
                     .Where(x => x.Value <= retingInternalUser.InternalCreditRating).ToList();
             
@@ -133,15 +97,13 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
                     Console.WriteLine("No conditions found for this type of credit");
                     return false;
                 }
-                else
-                {
-                    Console.WriteLine("Credit can be given");
-                    return true;
-                }
+
+                Console.WriteLine("Credit can be given");
+                return true;
             }
 
             var externalInformationUser =
-                db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationID == userNationalId);
+                db.CreditRatingUsersExternals.FirstOrDefault(u => u.NationalIdentificationId == userNationalId);
             var blackListedExternal = externalInformationUser?.IsBlackListed;
             if (blackListedExternal is not null && blackListedExternal.Value)
             {
@@ -165,11 +127,10 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.BadExample
                 Console.WriteLine("No conditions found for this type of credit");
                 return false;
             }
-            {
-                Console.WriteLine("Credit can be given");
-                return true;
-            }
+            Console.WriteLine("Credit can be given");
+            return true;
+            
+            // End: calculation ob eligibility for credit
         }
-
     }
 }

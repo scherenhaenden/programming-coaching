@@ -25,13 +25,13 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         {
             
             // Get internalusers that are not registered
-            var value = _dataCredit.Users.Where(u =>
-                    _dataCredit.RegistredUsers.All(ru => ru.NationalIdentificationID != u.NationalIdentificationID))
+            var value = _dataCredit.ExternalUsers.Where(u =>
+                    _dataCredit.RegisteredUsers.All(ru => ru.NationalIdentificationId != u.NationalIdentificationId))
                 .Take(1)
                 .ToList().First();
             
             // Arrange
-            string nationalIdentificationId = value.NationalIdentificationID;
+            string nationalIdentificationId = value.NationalIdentificationId;
             bool wantToRegister = true;
             var userService = new UserService(_dataCredit, _userExternalService, _userRegisteredDataService);
 
@@ -67,13 +67,13 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         {
             
             // Get internalusers that are not registered
-            var value = _dataCredit.Users.Where(u =>
-                    _dataCredit.RegistredUsers.All(ru => ru.NationalIdentificationID != u.NationalIdentificationID))
+            var value = _dataCredit.ExternalUsers.Where(u =>
+                    _dataCredit.RegisteredUsers.All(ru => ru.NationalIdentificationId != u.NationalIdentificationId))
                 .Take(1)
                 .ToList().First();
             
             // Arrange
-            string nationalIdentificationId = value.NationalIdentificationID;
+            string nationalIdentificationId = value.NationalIdentificationId;
             var userService = new UserService(_dataCredit, _userExternalService, _userRegisteredDataService);
 
             // Act

@@ -4,11 +4,11 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
 {
     public class ClassGenerateData
     {
-        public static List<User> Users = new List<User>();
+        public static List<UserExternalModel> Users = new List<UserExternalModel>();
         public static List<CreditRatingUserExternals> CreditRatingUserExternals = new List<CreditRatingUserExternals>();
     
     
-        public static List<RegistredUser> RegistredUsers { get; set; } = new List<RegistredUser>();
+        public static List<RegisteredUser> RegistredUsers { get; set; } = new List<RegisteredUser>();
     
     
         private static bool _isCreated = false;
@@ -48,9 +48,9 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         public static void CreateUsers()
     {
         // Create with bogus
-        var testsUsers = new Faker<User>().StrictMode(true)
+        var testsUsers = new Faker<UserExternalModel>().StrictMode(true)
             //.RuleFor(u => u.UserID, f => f.Random.Guid().ToString())
-            .RuleFor(u => u.NationalIdentificationID, f => f.Random.Guid().ToString())
+            .RuleFor(u => u.NationalIdentificationId, f => f.Random.Guid().ToString())
             //.RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
             .RuleFor(u => u.Name, f => f.Person.FullName)
             .RuleFor(u => u.Address, f => f.Address.FullAddress())
@@ -67,7 +67,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         foreach (var unregistered in listsOfUsers[0])
         {
             CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => unregistered.NationalIdentificationID)
+                .RuleFor(u => u.NationalIdentificationId, f => unregistered.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
 
@@ -76,14 +76,14 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         
         foreach (var registered in listsOfUsers[1])
         {
-            RegistredUsers.Add(new Faker<RegistredUser>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => registered.NationalIdentificationID)
-                .RuleFor(u => u.UserID, f => f.Random.Guid().ToString())
+            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+                .RuleFor(u => u.NationalIdentificationId, f => registered.NationalIdentificationId)
+                .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.InternalCreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => registered.NationalIdentificationID)
+                .RuleFor(u => u.NationalIdentificationId, f => registered.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             
@@ -92,13 +92,13 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         foreach (var both in listsOfUsers[2])
         {
             CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => both.NationalIdentificationID)
+                .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(0, 10))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             
-            RegistredUsers.Add(new Faker<RegistredUser>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => both.NationalIdentificationID)
-                .RuleFor(u => u.UserID, f => f.Random.Guid().ToString())
+            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+                .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
+                .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.InternalCreditRating, f => f.Random.Double(900, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
@@ -107,13 +107,13 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         foreach (var both in listsOfUsers[3])
         {
             CreditRatingUserExternals.Add(new Faker<CreditRatingUserExternals>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => both.NationalIdentificationID)
+                .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
                 .RuleFor(u => u.CreditRating, f => f.Random.Double(900, 1000))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
             
-            RegistredUsers.Add(new Faker<RegistredUser>().StrictMode(true)
-                .RuleFor(u => u.NationalIdentificationID, f => both.NationalIdentificationID)
-                .RuleFor(u => u.UserID, f => f.Random.Guid().ToString())
+            RegistredUsers.Add(new Faker<RegisteredUser>().StrictMode(true)
+                .RuleFor(u => u.NationalIdentificationId, f => both.NationalIdentificationId)
+                .RuleFor(u => u.UserId, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.AccountNumber, f => f.Random.Guid().ToString())
                 .RuleFor(u => u.InternalCreditRating, f => f.Random.Double(0, 100))
                 .RuleFor(u => u.IsBlackListed, f => f.Random.Bool(0.5f)));
@@ -284,17 +284,6 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.Data
         
         CreditConditions.Add(greenLoanConditions);
 
-
-
-            
-            
-
-
-
-
-
-
-        
 
     }
     

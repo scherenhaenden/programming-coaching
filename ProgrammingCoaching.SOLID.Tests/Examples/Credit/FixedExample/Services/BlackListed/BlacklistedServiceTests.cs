@@ -13,7 +13,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             ExtendedUserInformation extendedUserInformation = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser
+                RegisteredUser = new RegisteredUser
                 {
                     IsBlackListed = true
                 },
@@ -32,7 +32,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
             
             var extendedUserInformation1 = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser
+                RegisteredUser = new RegisteredUser
                 {
                     IsBlackListed = false
                 },
@@ -48,7 +48,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             var extendedUserInformation2 = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser
+                RegisteredUser = new RegisteredUser
                 {
                     IsBlackListed = true
                 },
@@ -71,7 +71,7 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         
             var extendedUserInformation3 = new ExtendedUserInformation
             {
-                RegistredUser = new RegistredUser
+                RegisteredUser = new RegisteredUser
                 {
                     IsBlackListed = false
                 },

@@ -20,12 +20,12 @@ namespace ProgrammingCoaching.SOLID.Tests.Examples.Credit.FixedExample.Services.
         public void GetCreditRatingUserExternals_ReturnsCorrectData()
         {
 
-            var identificationId = _db.CreditRatingUsersExternals.First(x=>x.IsBlackListed == false).NationalIdentificationID;
+            var identificationId = _db.CreditRatingUsersExternals.First(x=>x.IsBlackListed == false).NationalIdentificationId;
         
             var result = _userExternalService.GetCreditRatingUserExternals(identificationId);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(identificationId, result.NationalIdentificationID);
+            Assert.AreEqual(identificationId, result.NationalIdentificationId);
             Assert.Greater(result.CreditRating, 0);
             Assert.IsFalse(result.IsBlackListed);
         }

@@ -12,7 +12,7 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Rating
 
         public double GetRating(ExtendedUserInformation extendedUserInformation)
         {
-            return GetRating(extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0, extendedUserInformation?.RegistredUser.InternalCreditRating ?? 0);
+            return GetRating(extendedUserInformation?.CreditRatingUserExternals.CreditRating ?? 0, extendedUserInformation?.RegisteredUser.InternalCreditRating ?? 0);
         }
     }
 }
