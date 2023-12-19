@@ -1,21 +1,51 @@
-### Erkennen von LSP-Verstößen
+### Erkennen von DIP-Verstößen
 
-#### Nicht-Technische Anzeichen (Verstehen des LSP-Verstoßes):
+#### Nicht-Technische Anzeichen (Erkennen von DIP-Verstößen ohne technische Details):
 
-- **Unerwartetes Verhalten bei Vererbung**: Wenn abgeleitete Klassen sich anders verhalten als die Basisklasse und unerwartetes oder fehlerhaftes Verhalten zeigen, kann dies auf einen Verstoß gegen das LSP hinweisen.
+- **Direkte Abhängigkeiten zu konkreten Klassen**: Wenn eine Komponente (hoher Grad) direkte Abhängigkeiten zu konkreten Klassen (niedriger Grad) hat, statt von abstrakten Schnittstellen oder Klassen abhängig zu sein, könnte dies auf einen Verstoß gegen das DIP hinweisen.
 
-- **Verletzung der erwarteten Verträge**: Wenn eine abgeleitete Klasse Methoden oder Eigenschaften überschreibt und dabei vordefinierte Verträge (z. B. Vorbedingungen oder Nachbedingungen) der Basisklasse verletzt, liegt möglicherweise ein LSP-Verstoß vor.
+- **Schwierigkeiten bei der Wiederverwendung von Komponenten**: Wenn es schwer ist, eine Komponente in verschiedenen Kontexten wiederzuverwenden, weil sie starre Abhängigkeiten zu spezifischen Implementierungen hat, kann dies auf DIP-Verstöße hinweisen.
 
-- **Zwangsweise Verwendung von Typüberprüfungen**: Wenn Code in der Anwendung erfordert, dass der konkrete Typ einer Instanz überprüft wird, um unerwartetes Verhalten zu vermeiden, könnte dies ein Zeichen für LSP-Verletzungen sein.
+- **Harte Kopplung an Details**: Wenn eine Komponente Details über die Implementierungsdetails anderer Komponenten kennt und darauf angewiesen ist, kann dies auf einen DIP-Verstoß hinweisen.
 
-#### Technische Anzeichen (Erkennen des LSP-Verstoßes im Code):
+#### Technische Anzeichen (Erkennen von DIP-Verstößen im Code):
 
-- **Verletzung der Vertragserfüllung**: Wenn abgeleitete Klassen geerbte Verträge, wie Schnittstellen oder abstrakte Methoden, nicht ordnungsgemäß erfüllen und diese Verträge verletzen, besteht möglicherweise ein LSP-Verstoß.
+- **Verwendung von "new" für Konstruktion**: Wenn eine Klasse die "new"-Anweisung verwendet, um Abhängigkeiten direkt zu instanziieren, statt sie über Injektion oder IoC-Container bereitzustellen, könnte dies auf DIP-Verstöße hinweisen.
 
-- **Verstoß gegen das "ist-ein"-Prinzip**: Wenn eine abgeleitete Klasse behauptet, von einer Basisklasse zu erben, aber in Wirklichkeit nicht alle Verhaltensweisen der Basisklasse korrekt nachbildet, kann dies auf LSP-Verstöße hinweisen.
+- **Direkte Instanzierung von konkreten Klassen**: Wenn eine Klasse konkrete Klassen direkt instanziiert, anstatt abstrakte Schnittstellen oder Basisklassen zu verwenden, kann dies auf einen DIP-Verstoß hinweisen.
 
-- **Unerwartete Ausnahmen oder Fehler**: Wenn abgeleitete Klassen zu unerwarteten Ausnahmen oder Fehlern führen, insbesondere wenn sie als Ersatz für die Basisklasse verwendet werden, könnte dies auf LSP-Verletzungen hindeuten.
+- **Harte Verdrahtung von Abhängigkeiten**: Wenn Abhängigkeiten zwischen Komponenten hart verdrahtet sind, anstatt durch Konstruktorinjektion oder Dependency Injection Frameworks gelöst zu werden, könnte dies auf DIP-Verletzungen hinweisen.
 
-- **Inkonsistente Schnittstellenimplementierung**: Wenn abgeleitete Klassen Schnittstellen implementieren, aber einige Methoden nicht sinnvoll unterstützen oder sinnvolle Implementierungen fehlen, kann dies auf LSP-Verstöße hinweisen.
+- **Fehlende Schnittstellen oder abstrakte Klassen**: Wenn Klassen und Komponenten keine Schnittstellen oder abstrakten Basisklassen verwenden, um Abhängigkeiten zu kapseln, kann dies auf DIP-Verstöße hinweisen.
 
-- **Verletzung der Invarianz**: Wenn abgeleitete Klassen die Invarianz der Basisklasse nicht respektieren, indem sie Vorbedingungen oder Nachbedingungen der Basisklasse ändern oder aufheben, liegt möglicherweise ein LSP-Verstoß vor.
+- **Verstoß gegen das "Hochrangiges kontra Niedrigrangiges"-Prinzip**: Wenn hochrangige Module von niedrigrangigen Modulen abhängig sind, statt umgekehrt, kann dies auf einen DIP-Verstoß hinweisen.
+
+### Auswirkungen von Verstößen gegen das Dependency Inversion Principle (DIP) auf die Entwurfsqualität
+
+#### Nicht-Technische Anzeichen (Verstehen der Auswirkungen von DIP-Verstößen auf den Entwurf):
+
+- **Erhöhte Wartungskosten**: DIP-Verstöße führen zu erhöhten Wartungskosten, da Änderungen an einer Komponente Auswirkungen auf andere Komponenten haben können.
+
+- **Schlechte Wiederverwendbarkeit**: Komponenten mit starren Abhängigkeiten sind oft schwer wiederverwendbar, da sie auf spezifische Implementierungen festgelegt sind.
+
+- **Verlust der Modularität**: DIP fördert die Modularität, und Verstöße können zu einem Verlust dieser Modularität führen.
+
+#### Technische Anzeichen (Erkennen der technischen Auswirkungen von DIP-Verstößen im Code):
+
+- **Schwierigkeiten beim Testen**: DIP-Verstöße erschweren das Testen, da starre Abhängigkeiten dazu führen, dass umfangreiches Mocking erforderlich ist.
+
+- **Unvorhersehbares Verhalten**: Nicht abstrahierte Abhängigkeiten können zu unvorhersehbarem Verhalten führen, da Änderungen an einer Komponente Auswirkungen auf andere haben können.
+
+- **Schwierigkeiten bei der Erweiterung**: DIP-Verstöße erschweren die Erweiterung von Komponenten, da sie auf bestimmte Implementierungen angewiesen sind.
+
+#### Bewältigung von DIP-Verstößen:
+
+- **Abstraktion verwenden**: Stellen Sie sicher, dass Abhängigkeiten von abstrakten Schnittstellen oder Basisklassen abgeleitet sind, um die Flexibilität und Erweiterbarkeit zu erhöhen.
+
+- **Dependency Injection**: Verwenden Sie Dependency Injection (DI) und Inversion of Control (IoC) Container, um Abhängigkeiten bereitzustellen und die Verdrahtung zu entkoppeln.
+
+- **Verwendung von Schnittstellen und abstrakten Klassen**: Definieren Sie Schnittstellen und abstrakte Klassen, um Abhängigkeiten zu kapseln und den Grad der Kopplung zu reduzieren.
+
+- **Dependency Inversion Principle (DIP)**: Befolgen Sie das DIP, um sicherzustellen, dass hochrangige Module von abstrakten Schnittstellen und niedrigrangigen Modulen abhängig sind.
+
+Das Dependency Inversion Principle (DIP) ist entscheidend, um die Entkopplung, Testbarkeit und Erweiterbarkeit von Komponenten und Anwendungen sicherzustellen und die Wartungskosten zu reduzieren.

@@ -1,37 +1,47 @@
+### Erkennen von LSP-Verstößen
+
+#### Nicht-Technische Anzeichen (Erkennen von LSP-Verstößen ohne technische Details):
+
+- **Inkonsistente Verwendung von Unterklassen**: Wenn Unterklassen einer Oberklasse inkonsistent verwendet werden, indem sie bestimmte Verhaltensweisen nicht erfüllen oder unerwartete Ausnahmen auslösen, könnte dies auf einen Verstoß gegen das LSP hinweisen.
+
+- **Schwierigkeiten bei der Subklassen-Erweiterung**: Wenn die Erweiterung von Unterklassen schwierig ist und Entwickler vor Herausforderungen stellt, könnte dies auf LSP-Verstöße hinweisen.
+
+- **Unvorhersehbares Verhalten bei Polymorphismus**: Wenn die Verwendung von Polymorphismus und abgeleiteten Klassen zu unvorhersehbarem Verhalten oder Fehlern führt, könnte dies auf LSP-Verstöße hinweisen.
+
+#### Technische Anzeichen (Erkennen von LSP-Verstößen durch technische Analyse im Code):
+
+- **Verstoß gegen die Vorbedingungen**: Wenn Unterklassen Methodenüberschreibungen haben, die die Vorbedingungen (Eingabebedingungen) der Basisklasse verschärfen, könnte dies auf LSP-Verstöße hinweisen.
+
+- **Verstoß gegen die Nachbedingungen**: Wenn Unterklassen Methodenüberschreibungen haben, die die Nachbedingungen (Ausgabebedingungen) der Basisklasse abschwächen, könnte dies auf LSP-Verstöße hinweisen.
+
+- **Unbehandelte Ausnahmen**: Wenn Unterklassen unerwartete Ausnahmen auslösen oder solche Ausnahmen nicht behandeln, könnte dies auf LSP-Verstöße hinweisen.
+
 ### Auswirkungen von Verstößen gegen das Liskov Substitution Principle (LSP) auf die Entwurfsqualität
 
-#### Nicht-Technische Anzeichen (Verstehen von Verstößen gegen das LSP):
+#### Nicht-Technische Anzeichen (Verstehen der Auswirkungen von LSP-Verstößen auf den Entwurf):
 
-- **Verhalten nicht erwartungsgemäß**: Wenn abgeleitete Klassen (Subtypen) sich anders verhalten als erwartet, wenn sie anstelle ihrer Basisklassen (Supertypen) verwendet werden, könnte dies auf Verstöße gegen das LSP hinweisen.
+- **Verletzung der Vertragsregel**: LSP-Verstöße verstoßen gegen die Vertragsregel, die besagt, dass Unterklassen sich wie ihre Basisklassen verhalten sollten. Dies führt zu Inkonsistenzen und unerwartetem Verhalten.
 
-- **Einschränkungen bei der Verwendung von Subtypen**: Wenn Entwickler Schwierigkeiten haben, Subtypen anstelle ihrer Basisklassen ohne unerwartete Nebenwirkungen zu verwenden, kann dies auf LSP-Verstöße hinweisen.
+- **Verlust der Erweiterbarkeit**: Wenn Unterklassen nicht nahtlos erweitert werden können, ohne das Verhalten der Basisklassen zu beeinträchtigen, führt dies zu einem Verlust der Erweiterbarkeit.
 
-- **Überraschende Ausnahmen und Fehler**: Das Auftreten von unerwarteten Ausnahmen oder Fehlern, wenn Subtypen verwendet werden, kann auf LSP-Verstöße hinweisen.
+- **Erhöhter Wartungsaufwand**: LSP-Verstöße erfordern häufige Korrekturen und Anpassungen, um das Verhalten von Unterklassen mit dem Verhalten der Basisklassen in Einklang zu bringen.
 
-#### Technische Anzeichen (Erkennen von Verstößen gegen das LSP im Code):
+#### Technische Anzeichen (Erkennen der technischen Auswirkungen von LSP-Verstößen im Code):
 
-- **Überschreiben von Methoden mit veränderter Funktionalität**: Wenn Subtypen Methoden der Basisklasse überschreiben und dabei die erwartete Funktionalität ändern oder Einschränkungen hinzufügen, kann dies auf LSP-Verstöße hinweisen.
+- **Unvorhersehbares Verhalten**: LSP-Verstöße führen zu unvorhersehbarem Verhalten, wenn Unterklassen nicht wie erwartet agieren und die Vertragsregel brechen.
 
-- **Erzwungene Methodenimplementierungen**: Wenn Subtypen gezwungen sind, bestimmte Methoden zu implementieren, die für ihre Verwendung nicht sinnvoll sind oder bei denen sie nur leere Implementierungen haben, könnte dies auf LSP-Verstöße hinweisen.
+- **Fehlende Verwendung von Polymorphismus**: Wenn Polymorphismus vermieden wird, um LSP-Verstöße zu vermeiden, führt dies zu einer geringeren Nutzung der objektorientierten Konzepte.
 
-- **Fehlende Unterstützung für gemeinsame Schnittstellen**: Wenn Subtypen keine Unterstützung für gemeinsame Schnittstellen bieten, die von den Basisklassen erwartet werden, kann dies auf LSP-Verstöße hinweisen.
-
-#### Auswirkungen auf die Entwurfsqualität:
-
-- **Verletzung von Vertrag und Verhalten**: LSP-Verstöße führen dazu, dass Subtypen den Vertrag und das erwartete Verhalten der Basisklassen verletzen, was zu unvorhersehbarem und inkonsistentem Verhalten führen kann.
-
-- **Eingeschränkte Wiederverwendbarkeit**: Subtypen, die das LSP verletzen, sind möglicherweise nicht so einfach wiederverwendbar, da sie in unerwarteten Situationen Fehler verursachen können.
-
-- **Erschwerte Wartbarkeit**: Die Verletzung des LSP kann die Wartbarkeit des Codes erschweren, da Entwickler immer auf unerwartete Verhaltensweisen vorbereitet sein müssen.
+- **Komplexe Sonderfälle**: LSP-Verstöße erfordern oft die Einführung von Sonderfällen und komplexen Prüfungen, um unerwünschtes Verhalten zu verhindern.
 
 #### Bewältigung von LSP-Verstößen:
 
-- **Sorgfältige Vererbungshierarchie**: Achten Sie bei der Erstellung von Vererbungshierarchien darauf, dass Subtypen den Vertrag der Basisklassen beibehalten und das erwartete Verhalten nicht ändern.
+- **Richtige Verwendung von Polymorphismus**: Stellen Sie sicher, dass Polymorphismus richtig verwendet wird und Unterklassen sich wie ihre Basisklassen verhalten.
 
-- **Verwendung von Schnittstellen und abstrakten Klassen**: Statt direkter Vererbung können Sie Schnittstellen und abstrakte Klassen verwenden, um sicherzustellen, dass Subtypen die erwarteten Verhaltensweisen implementieren.
+- **Korrekte Vor- und Nachbedingungen**: Achten Sie darauf, dass Methodenüberschreibungen in Unterklassen die Vor- und Nachbedingungen der Basisklassen einhalten.
 
-- **Verträge definieren**: Klären Sie die Verträge und Erwartungen für Subtypen, um sicherzustellen, dass sie das erwartete Verhalten beibehalten.
+- **Sorgfältige Planung von Vererbungshierarchien**: Planen Sie Vererbungshierarchien sorgfältig, um sicherzustellen, dass Unterklassen problemlos erweitert werden können, ohne das Verhalten der Basisklassen zu beeinträchtigen.
 
-- **Tests und Überprüfungen**: Implementieren Sie Tests und Überprüfungen, um sicherzustellen, dass Subtypen das LSP einhalten und das erwartete Verhalten beibehalten.
+- **Tests und Überprüfungen**: Implementieren Sie umfangreiche Tests und Überprüfungen, um sicherzustellen, dass Unterklassen das LSP einhalten und sich wie erwartet verhalten.
 
-Das Liskov Substitution Principle (LSP) ist entscheidend, um sicherzustellen, dass Subtypen ohne unerwartete Nebenwirkungen anstelle ihrer Basisklassen verwendet werden können, und um die Entwurfsqualität zu erhalten.
+Das Liskov Substitution Principle (LSP) ist entscheidend, um die Zuverlässigkeit und Vorhersehbarkeit von Objektorientierter Programmierung zu gewährleisten und unerwünschtes Verhalten zu vermeiden.
