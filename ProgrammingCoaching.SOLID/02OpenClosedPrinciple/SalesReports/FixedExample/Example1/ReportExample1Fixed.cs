@@ -94,5 +94,6 @@ public class ReportExample1Fixed
         else if (typeOfReport == "Wholesale")
             return new WholesaleSalesReport().GetReport(salesData);
         // ... and so forth for each sale type
+        return null;
     }
 }
