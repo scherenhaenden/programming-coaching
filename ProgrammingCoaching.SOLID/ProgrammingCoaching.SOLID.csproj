@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="03LiskSubstitutionPrinciple\Animals\BadExample\" />
       <Folder Include="Examples\Credit\BetterExample\" />
     </ItemGroup>
 
