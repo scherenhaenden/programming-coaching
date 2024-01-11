@@ -7,14 +7,13 @@ namespace ProgrammingCoaching.SOLID._02OpenClosedPrinciple.SalesReports.BadExamp
 // Bitte bedenken dass diese eigentlich in allen bsp diese Klasse in laufe Der Zeit darstellen soll
 
 /*
- * step 2
- * Die Anferderung wurde erweitert/geändert nach einer Zeit
- * Jetzt die Anforderung ist einen Report für die Online Sales notwendig.
- * Der Report für die In-Store Sales muss aber auch noch vorhanden sein und
- * weiter generiert werden
- * Der Entwickler kommt auf die Idee die Methode zu "erweitern" und die Anforderung
- * zu erfüllen
- */
+* Schritt 2
+* Im Laufe der Zeit erweitert sich die Anforderung.
+* Nun wird zusätzlich ein Bericht für Online-Verkäufe benötigt.
+* Gleichzeitig muss der Bericht für In-Store-Verkäufe weiterhin vorhanden sein und erstellt werden.
+* Der Entwickler entscheidet sich, die Methode zu "erweitern", um diese neue Anforderung zu erfüllen.
+*/
+
 public class ReportExample2Bad
 {
     public Stream? GetReport(dynamic salesData, string typeOfReport)

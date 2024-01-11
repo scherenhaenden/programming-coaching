@@ -8,11 +8,12 @@ namespace ProgrammingCoaching.SOLID._02OpenClosedPrinciple.SalesReports.BadExamp
 // Bitte bedenken dass diese eigentlich in allen bsp diese Klasse in laufe Der Zeit darstellen soll
 
 /*
- * step 3
- * Mit laufe der Zeit kommen immer mehr Anforderungen hinzu und wirklich
- * viele Typen weil der Firma so gut geht dass die jetzt so viele Rports brauchen
- * Die Fuzis in Marketing können nicht genügend reports bekommen usw.
- */
+* Schritt 3
+* Im weiteren Verlauf kommen immer mehr Anforderungen hinzu,
+* da das Geschäft der Firma floriert und eine Vielzahl unterschiedlicher Berichtstypen benötigt wird.
+* Das Marketing-Team hat einen ständig wachsenden Bedarf an diversen Berichten.
+*/
+
 public class ReportExample3Bad
 {
     public Stream? GetReport(dynamic salesData, string typeOfReport)

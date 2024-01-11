@@ -1,19 +1,19 @@
 namespace ProgrammingCoaching.SOLID._02OpenClosedPrinciple.SalesReports.BadExample;
 
-// !!!!!!! Achtung !!!!!!!
-// Dieses Beispiel ist nur ein Beispiel und nicht lauffähig
-// Es soll nur die Idee des Open-Closed-Principle vermitteln
-// Zu bedenken ist dass in der Methoden die Implementierungsdetails drinnen wären
-// Bitte bedenken dass diese eigentlich in allen bsp diese Klasse in laufe Der Zeit darstellen soll
+// !!! Wichtiger Hinweis !!!
+// Dieses Beispiel dient ausschließlich Illustrationszwecken und ist nicht direkt ausführbar.
+// Es zielt darauf ab, das Konzept des Open-Closed-Prinzips zu veranschaulichen.
+// Bitte beachten Sie, dass die Implementierungsdetails in den Methoden nicht ausgeführt sind.
+// Diese Klasse soll exemplarisch die Entwicklung und Erweiterungen über die Zeit darstellen.
 
 /*
- * step 1
- * In diesen ersten bsp fangen wir an mit der Anforderung von seite des Fachbereichs
- * Sie Möchten einen Report für die In-Store Sales
- * Wir haben hier eine Methode die einen Stream zurück gibt
- * Die Methode Verbinden mit dem Datenbank und/oder mit dem Filesystem und/oder mit dem WebService
- * um die Daten herauszuziehen und dann den Report zu generieren
- * Anschließend wird der Stream zurück gegeben und der Fachbereich kann damit machen was er will
+ * Schritt 1
+ * In diesem ersten Beispiel beginnen wir mit einer Anforderung seitens des Fachbereichs.
+ * Es wird ein Bericht für die In-Store-Verkäufe gewünscht.
+ * Hierzu implementieren wir eine Methode, die einen Stream zurückgibt.
+ * Die Methode stellt eine Verbindung zur Datenbank, zum Dateisystem oder zu einem WebService her,
+ * um die erforderlichen Daten zu extrahieren und anschließend den Bericht zu generieren.
+ * Der generierte Stream wird dann zurückgegeben, und der Fachbereich kann diesen nach Belieben verwenden.
  */
 public class ReportExample1Bad
 {
