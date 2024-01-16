@@ -1,6 +1,25 @@
 namespace ProgrammingCoaching.SOLID._03LiskSubstitutionPrinciple.PetStore.BadExample;
 
 
+// !!! Wichtiger Hinweis !!!
+// Dieses Beispiel dient ausschließlich Illustrationszwecken und ist nicht direkt ausführbar.
+// Es zielt darauf ab, das Konzept des Open-Closed-Prinzips zu veranschaulichen.
+// Bitte beachten Sie, dass die Implementierungsdetails in den Methoden nicht ausgeführt sind.
+// Diese Klasse soll exemplarisch die Entwicklung und Erweiterungen über die Zeit darstellen.
+
+/*
+ * Schritt 3
+ * In diesem ersten Beispiel beginnen wir mit einer Anforderung in einem PetStore.
+ * Es wird ein Tier verkauft.
+ * Hierzu implementieren wir eine interface, die die Methoden definiert, die wir benötigen.
+ * Die methoden geben uns eigentschaften des Tieres zurück.
+ *
+ * Aber hier kommt ein neues Tier dazu, dieses mal ein Stofftier.
+ * Dieses Tier kann nicht fliegen, kann nicht schwimmen, aber es hat Batterien weil es kein lebendiges tier ist
+ * Für die Implementierungen der Loro und Eagle müssen wir nun eine Exception werfen. (siehe unten)
+ * Für die Implemntierung des Crocodile müssen wir nun eine Exception werfen. (siehe unten)
+ * 
+ */
 public interface IAnimalBadExample3
 {
     object GetColourOf();
