@@ -6,91 +6,79 @@ namespace ProgrammingCoaching.SOLID._03LiskSubstitutionPrinciple.PetStore.BadExa
 // Bitte beachten Sie, dass die Implementierungsdetails in den Methoden nicht ausgeführt sind.
 // Diese Klasse soll exemplarisch die Entwicklung und Erweiterungen über die Zeit darstellen.
 
-
 /*
- * Schritt 1
- * In diesem ersten Beispiel beginnen wir mit einer Anforderung in einem PetStore.
- * Es wird ein Tier verkauft.
- * Hierzu implementieren wir eine interface, die die Methoden definiert, die wir benötigen.
- * Die methoden geben uns eigentschaften des Tieres zurück.
- */
-public interface IAnimalBadExample1
+* Schritt 1
+* In diesem ersten Beispiel starten wir mit einer Anforderung im PetStore.
+* Hierbei wird ein Vogel trainiert und je nachdem, ob es sich um ein echtes Tier handelt oder nicht,
+* werden die Batterien ausgetauscht.
+*/
+public class BirdBadExample1
 {
-    object GetColourOf();
-    
-    object GetWeightOf();
-    
-    object IsItDangerous();
-    
-    object FlySpeed();
-}
-
-public class LoroBadExample1: IAnimalBadExample1
-{
-    public object GetColourOf()
+    /// <summary>
+    /// Startet den Flug des Vogels.
+    /// </summary>
+    public void StartToFly()
     {
-        return "Green";
+        // Implementierungsdetails hier einfügen
+        Console.WriteLine("Vogel fliegt.");
     }
-
-    public object GetWeightOf()
+    
+    /// <summary>
+    /// Wechselt die Batterien des Vogels.
+    /// </summary>
+    public void ChangeBatteries()
     {
-        return 0.5;
-    }
-
-    public object IsItDangerous()
-    {
-        return false;
-    }
-
-    public object FlySpeed()
-    {
-        return 10;
+        // Implementierungsdetails hier einfügen
+        Console.WriteLine("Batterien wurden gewechselt.");
     }
 }
 
-
-public class EagleBadExample1: IAnimalBadExample1
+public class LoroBadExample1 : BirdBadExample1
 {
-    public object GetColourOf()
-    {
-        return "Brown";
-    }
+   
+}
 
-    public object GetWeightOf()
-    {
-        return 1.5;
-    }
+public class PenguinBadExample1 : BirdBadExample1
+{
+   
+}
 
-    public object IsItDangerous()
-    {
-        return true;
-    }
-
-    public object FlySpeed()
-    {
-        return 100;
-    }
+public class StuffedAnimalBadExample1 : BirdBadExample1
+{
+   
 }
 
 public class PetStoreBadExample1
 {
-    public void Sell(IAnimalBadExample1 animal)
+    /// <summary>
+    /// Trainiert einen Papagei, indem die Batterien gewechselt werden.
+    /// </summary>
+    public void TrainBird(LoroBadExample1 bird)
     {
-        // ...
-        // ... code
-        // ... mehr code
-        // ... noch mehr code
-        // ... und noch mehr code
-        // ... ultra noch mehr code und so weiter
-        // ...
-        
-        // hier wird das Tier verkauft
-        // ...
-        // ... code
-        // ... mehr code
-        // ... noch mehr code
-        // ... und noch mehr code
-        // ... ultra noch mehr code und so weiter
-        // ...
+        bird.ChangeBatteries();
+    }
+    
+    /// <summary>
+    /// Setzt Batterien in einen Vogel ein, damit er fliegt.
+    /// </summary>
+    public void PutBatteriesBird(PenguinBadExample1 bird)
+    {
+        bird.StartToFly();
+    }
+    
+    /// <summary>
+    /// Trainiert einen Vogel, indem die Batterien gewechselt werden.
+    /// </summary>
+    public void TrainBird(BirdBadExample1 birdBadExample1)
+    {
+        birdBadExample1.ChangeBatteries();
+    }
+    
+    /// <summary>
+    /// Setzt Batterien in einen Vogel ein, damit er fliegt.
+    /// </summary>
+    public void PutBatteriesBird(BirdBadExample1 birdBadExample1)
+    {
+        birdBadExample1.StartToFly();
     }
 }
