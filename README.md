@@ -6,12 +6,12 @@ Programming Coaching is a comprehensive learning platform designed for developer
 ## SOLID Principles and Related Concepts
 This program covers a wide range of principles and concepts essential fo‚r modern software development, particularly focusing on SOLID principles and their applications.
 
+- - [x] SOLID Principles 
 - - [x] Single Responsibility Principle (SRP) 
-- - [ ] SOLID Principles 
 - - [x] Open-Closed Principle (OCP) 
-- - [ ] Liskov Substitution Principle (LSP) 
-- - [ ] Interface Segregation Principle (ISP) 
-- - [ ] Dependency Inversion Principle (DIP) 
+- - [x] Liskov Substitution Principle (LSP) 
+- - [x] Interface Segregation Principle (ISP) 
+- - [x] Dependency Inversion Principle (DIP) 
 - - [ ] Cohesion 
 - - [ ] Low Coupling 
 - - [ ] Design Patterns 
@@ -26,7 +26,6 @@ This program covers a wide range of principles and concepts essential fo‚r mod
 - - [ ] Code Reviews 
 - - [ ] Inheritance and Polymorphism 
 - - [ ] Abstraction 
-- - [ ] Dependency Injection (DI) 
 - - [ ] Frameworks and Libraries 
 - - [ ] Testing and Testability 
 - - [ ] Versioning and Maintenance 
