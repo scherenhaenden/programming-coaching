@@ -1,6 +1,5 @@
 namespace ProgrammingCoaching.SOLID._03LiskSubstitutionPrinciple.PetStore.BadExample;
 
-
 // !!! Wichtiger Hinweis !!!
 // Dieses Beispiel dient ausschließlich Illustrationszwecken und ist nicht direkt ausführbar.
 // Es zielt darauf ab, das Konzept des Open-Closed-Prinzips zu veranschaulichen.
@@ -8,114 +7,105 @@ namespace ProgrammingCoaching.SOLID._03LiskSubstitutionPrinciple.PetStore.BadExa
 // Diese Klasse soll exemplarisch die Entwicklung und Erweiterungen über die Zeit darstellen.
 
 /*
- * Schritt 2
- * In diesem ersten Beispiel beginnen wir mit einer Anforderung in einem PetStore.
- * Es wird ein Tier verkauft.
- * Hierzu implementieren wir eine interface, die die Methoden definiert, die wir benötigen.
- * Die methoden geben uns eigentschaften des Tieres zurück.
- *
- * Aber hier kommt ein neues Tier dazu, der Krokodil.
- * Dieses Tier kann nicht fliegen, aber es kann schwimmen.
- * Für die Implementierungen der Loro und Eagle müssen wir nun eine Exception werfen. (siehe unten)
- * Das stellt ein Problem dar, da wir nun die Methoden nicht mehr verwenden können aber die stehen zur Verfügung.
- * Ein klares Designproblem.
- */
-
-public interface IAnimalBadExample2
+* Schritt 1
+* In diesem ersten Beispiel starten wir mit einer Anforderung im PetStore.
+* Hierbei wird ein Vogel trainiert und je nachdem, ob es sich um ein echtes Tier handelt oder nicht,
+* werden die Batterien ausgetauscht.
+*/
+public class BirdBadExample2
 {
-    object GetColourOf();
+    /// <summary>
+    /// Startet den Flug des Vogels.
+    /// </summary>
+    public void StartToFly()
+    {
+        // Implementierungsdetails hier einfügen
+        Console.WriteLine("Vogel fliegt.");
+    }
     
-    object GetWeightOf();
-    
-    object IsItDangerous();
-
-    object FlySpeed();
-    
-    object SwimSpeed();
-}
-
-public class LoroBadExample2: IAnimalBadExample2
-{
-    public object GetColourOf()
+    /// <summary>
+    /// Wechselt die Batterien des Vogels.
+    /// </summary>
+    public void ChangeBatteries()
     {
-        return "Green";
-    }
-
-    public object GetWeightOf()
-    {
-        return 0.5;
-    }
-
-    public object IsItDangerous()
-    {
-        return false;
-    }
-
-    public object FlySpeed()
-    {
-        return 10;
-    }
-
-    public object SwimSpeed()
-    {
-        throw new Exception("Do NOT use this method on Loros");
+        // Implementierungsdetails hier einfügen
+        Console.WriteLine("Batterien wurden gewechselt.");
     }
 }
 
-
-public class EagleBadExample2: IAnimalBadExample2
+public class LoroBadExample2 : BirdBadExample2
 {
-    public object GetColourOf()
+    
+    
+    
+    public new void ChangeBatteries()
     {
-        return "Brown";
-    }
-
-    public object GetWeightOf()
-    {
-        return 1.5;
-    }
-
-    public object IsItDangerous()
-    {
-        return true;
-    }
-
-    public object FlySpeed()
-    {
-        return 100;
-    }
-
-    public object SwimSpeed()
-    {
-        throw new Exception("Do NOT use this method on Eagles");
+        // Implementierungsdetails hier einfügen
+        // Console.WriteLine("Batterien wurden gewechselt.");
+        throw new Exception("Papageien haben keine Batterien.");
     }
 }
 
-
-public class CrocodileBadExample2: IAnimalBadExample2
+public class PenguinBadExample2 : BirdBadExample2
 {
-    public object GetColourOf()
+    public new void StartToFly()
     {
-        return "Green";
+        // Implementierungsdetails hier einfügen
+        // Console.WriteLine("Batterien wurden gewechselt.");
+        throw new Exception("Pinguine können nicht fliegen.");
     }
-
-    public object GetWeightOf()
+    
+    
+    
+    public new void ChangeBatteries()
     {
-        return 10.5;
+        // Implementierungsdetails hier einfügen
+        // Console.WriteLine("Batterien wurden gewechselt.");
+        throw new Exception("Papageien haben keine Batterien.");
     }
+}
 
-    public object IsItDangerous()
+public class StuffedAnimalBadExample2 : BirdBadExample2
+{
+    public new void StartToFly()
     {
-        return true;
+        // Implementierungsdetails hier einfügen
+        // Console.WriteLine("Batterien wurden gewechselt.");
+        throw new Exception("Stofftiere können nicht fliegen.");
     }
+}
 
-    public object FlySpeed()
+public class PetStoreBadExample2
+{
+    /// <summary>
+    /// Trainiert einen Papagei, indem die Batterien gewechselt werden.
+    /// </summary>
+    public void TrainBird(LoroBadExample2 bird)
     {
-        throw new Exception("Do NOT use this method on crocodiles");
+        bird.ChangeBatteries();
     }
-
-    public object SwimSpeed()
+    
+    /// <summary>
+    /// Setzt Batterien in einen Vogel ein, damit er fliegt.
+    /// </summary>
+    public void PutBatteriesBird(PenguinBadExample2 bird)
     {
-        throw new NotImplementedException();
+        bird.StartToFly();
+    }
+    
+    /// <summary>
+    /// Trainiert einen Vogel, indem die Batterien gewechselt werden.
+    /// </summary>
+    public void TrainBird(BirdBadExample2 birdBadExample2)
+    {
+        birdBadExample2.ChangeBatteries();
+    }
+    
+    /// <summary>
+    /// Setzt Batterien in einen Vogel ein, damit er fliegt.
+    /// </summary>
+    public void PutBatteriesBird(BirdBadExample2 birdBadExample2)
+    {
+        birdBadExample2.StartToFly();
     }
 }

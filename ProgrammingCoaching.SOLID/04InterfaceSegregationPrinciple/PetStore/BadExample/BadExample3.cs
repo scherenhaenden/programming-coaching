@@ -1,4 +1,4 @@
-namespace ProgrammingCoaching.SOLID._03LiskSubstitutionPrinciple.PetStore.BadExample;
+namespace ProgrammingCoaching.SOLID._04InterfaceSegregationPrinciple.PetStore.BadExample;
 
 
 // !!! Wichtiger Hinweis !!!
