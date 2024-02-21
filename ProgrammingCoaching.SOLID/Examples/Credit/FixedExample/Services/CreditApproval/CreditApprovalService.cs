@@ -29,6 +29,5 @@ namespace ProgrammingCoaching.SOLID.Examples.Credit.FixedExample.Services.Credit
        
         }
     
-    
     }
 }
