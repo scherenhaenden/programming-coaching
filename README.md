@@ -3,20 +3,15 @@
 ## Overview
 Programming Coaching is a comprehensive learning platform designed for developers to enhance their programming skills, focusing on best practices and design principles in software development. This tool serves as a guide and reference for various fundamental and advanced concepts.
 
-## Features
-- - [ ] Interactive learning modules
-- - [ ] Real-world examples and case studies
-- - [ ] Personalized progress tracking
-
 ## SOLID Principles and Related Concepts
 This program covers a wide range of principles and concepts essential fo‚r modern software development, particularly focusing on SOLID principles and their applications.
 
-- - [ ] Single Responsibility Principle (SRP) 
-- - [ ] SOLID Principles 
-- - [ ] Open- - [ ]Closed Principle (O‚CP) 
-- - [ ] Liskov Substitution Principle (LSP) 
-- - [ ] Interface Segregation Principle (ISP) 
-- - [ ] Dependency Inversion Principle (DIP) 
+- - [x] SOLID Principles 
+- - [x] Single Responsibility Principle (SRP) 
+- - [x] Open-Closed Principle (OCP) 
+- - [x] Liskov Substitution Principle (LSP) 
+- - [x] Interface Segregation Principle (ISP) 
+- - [x] Dependency Inversion Principle (DIP) 
 - - [ ] Cohesion 
 - - [ ] Low Coupling 
 - - [ ] Design Patterns 
@@ -26,12 +21,11 @@ This program covers a wide range of principles and concepts essential fo‚r mod
 - - [ ] Refactoring 
 - - [ ] Clean Code 
 - - [ ] Architectural Patterns 
-  - - [ ] Model- - [ ]View- - [ ]Controller (MVC) 
-  - - [ ] Model- - [ ]View- - [ ]ViewModel (MVVM) 
+  - - [ ] Model-View-Controller (MVC) 
+  - - [ ] Model-View-ViewModel (MVVM) 
 - - [ ] Code Reviews 
 - - [ ] Inheritance and Polymorphism 
 - - [ ] Abstraction 
-- - [ ] Dependency Injection (DI) 
 - - [ ] Frameworks and Libraries 
 - - [ ] Testing and Testability 
 - - [ ] Versioning and Maintenance 
@@ -46,10 +40,10 @@ This program covers a wide range of principles and concepts essential fo‚r mod
 - - [ ] Refactoring and Evolution 
 - - [ ] Violations of LSP 
 - - [ ] Interface Segregation 
-- - [ ] Client- - [ ]Centric Design 
+- - [ ] Client-Centric Design 
 - - [ ] Composition over Inheritance 
 - - [ ] Reduced Coupling 
-- - [ ] Plug- - [ ]and- - [ ]Play Architecture 
+- - [ ] Plug-and-Play Architecture 
 - - [ ] Inversion of Control (IoC) 
 - - [ ] Separation of Concerns 
 - - [ ] Inversion of Control Containers 
